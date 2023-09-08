@@ -11,21 +11,22 @@ import javax.persistence.Enumerated;
 @Embeddable
 public class MemberInfoVO {
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false, name="name")
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, name="gender")
     private GenderEnum gender;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name="age_range")
     private AgeRangeEnum ageRange;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name="job")
     private String job;
 
     protected MemberInfoVO() {}
+
 
     public MemberInfoVO(String name, GenderEnum gender, AgeRangeEnum ageRange, String job) {
         this.name = name;
