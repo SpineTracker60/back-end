@@ -8,9 +8,9 @@ import lombok.Getter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "POSTURE_TB")
+@Table(name = "POSTURE_LOG_TB")
 @Getter
-public class Posture {
+public class PostureLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +26,9 @@ public class Posture {
     @Embedded
     private DateTimeVO dateTime;
 
-    protected Posture() {}
+    protected PostureLog() {}
 
-    public Posture(MemberVO member, PostureTag postureTag, DateTimeVO dateTime) {
+    public PostureLog(MemberVO member, PostureTag postureTag, DateTimeVO dateTime) {
         this.member = member;
         this.postureTag = postureTag;
         this.dateTime = dateTime;
