@@ -44,16 +44,17 @@ public class CreateMemberService {
         );
         return memberRepository.save(createdMemberByLocal);
     }
-    // 소셜 로그인 시
-    public Member createMemberBySocial(CreateMemberBySocialDTO createMemberBySocialDTO) {
-        Member createdMemberBySocial = new Member(
-                createMemberBySocialDTO.getEmail(),
-                createMemberBySocialDTO.getUID(),
-                createMemberBySocialDTO.getProfileImage(),
-                createMemberBySocialDTO.getRole(),
-                createMemberBySocialDTO.getPlatformEnum(),
-                createMemberBySocialDTO.getMemberInfo()
-        );
-        return memberRepository.save(createdMemberBySocial);
-    }
+//    // 소셜 로그인 시
+//    @Transactional
+//    public Member createMemberBySocial(CreateMemberBySocialDTO createMemberBySocialDTO) {
+//        Member createdMemberBySocial = new Member(
+//                createMemberBySocialDTO.getEmail(),
+//                createMemberBySocialDTO.getUID(),
+//                createMemberBySocialDTO.getProfileImage(),
+//                createMemberBySocialDTO.getRole(),
+//                createMemberBySocialDTO.getPlatformEnum(),
+//                createMemberBySocialDTO.getMemberInfo()
+//        );
+//        return memberRepository.save(createdMemberBySocial);
+//    }
 }
