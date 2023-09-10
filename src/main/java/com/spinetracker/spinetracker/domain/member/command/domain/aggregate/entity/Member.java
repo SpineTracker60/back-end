@@ -68,20 +68,24 @@ public class Member {
         this.memberInfo = memberInfo;
     }
 
-    public void setEmail(String email) {
+    public Member setEmail(String email) {
         this.email = email;
+        return this;
     }
 
-    public void setPassword(String password) {
+    public Member setPassword(String password) {
         this.password = password;
+        return this;
     }
 
-    public void setProfileImage(String profileImage) {
+    public Member setProfileImage(String profileImage) {
         this.profileImage = profileImage;
+        return this;
     }
 
-    public void setRole(RoleEnum role) {
+    public Member setRole(RoleEnum role) {
         this.role = role;
+        return this;
     }
 
     public void setMemberInfo(MemberInfoVO memberInfo) {
