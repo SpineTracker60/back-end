@@ -1,6 +1,5 @@
 package com.spinetracker.spinetracker.domain.member.command.application.service;
 
-import com.spinetracker.spinetracker.domain.member.command.application.dto.CreateMemberByLocalDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

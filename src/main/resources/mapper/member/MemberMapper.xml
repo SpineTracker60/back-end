@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spinetracker.spinetracker.domain.member.query.domain.repository.MemberMapper">
+    <resultMap id="MemberMap" type="com.spinetracker.spinetracker.domain.member.query.application.dto.FindMemberDTO">
+        <id property="id" column="id" />
+        <result property="name" column="name"/>
+        <result property="gender" column="gender"/>
+        <result property="ageRange" column="ageRange"/>
+        <result property="job" column="job"/>
+        <result property="profileImage" column="profileImage"/>
+        <result property="platform" column="platform"/>
+        <result property="role" column="role"/>
+        <result property="email" column="email"/>
+    </resultMap>
+
+    <select id="findByUID" resultMap="MemberMap">
+        SELECT *
+        FROM
+            MEMBER_TB
+        WHERE
+            uid = #{uid}
+    </select>
+</mapper>

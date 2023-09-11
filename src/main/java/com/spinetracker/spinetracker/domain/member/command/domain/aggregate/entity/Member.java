@@ -21,8 +21,8 @@ public class Member {
     @Column(length = 100, nullable = false, unique = true)
     private String email;
 
-    @Column(length = 300, nullable = true)
-    private String password;
+    @Column(nullable = false)
+    private String name;
 
     @Column(nullable = true, name="uid")
     private String UID;
@@ -42,30 +42,22 @@ public class Member {
     @Column(nullable = false, name="created_date")
     private LocalDateTime createdDate;
 
-    @Embedded
-    private MemberInfoVO memberInfo;
+//    @Embedded
+//    private MemberInfoVO memberInfo;
 
 
     protected Member() {}
 
-    // 자체 로그인 시
-    public Member(String email, String password, RoleEnum role, MemberInfoVO memberInfo) {
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.createdDate = LocalDateTime.now();
-        this.memberInfo = memberInfo;
-    }
 
-    // 소셜 로그인 시
-    public Member(String email, String UID, String profileImage, RoleEnum role, PlatformEnum platform, MemberInfoVO memberInfo) {
+
+    public Member(String email, String name, String UID, String profileImage, RoleEnum role, PlatformEnum platform) {
         this.email = email;
+        this.name = name;
         this.UID = UID;
         this.profileImage = profileImage;
         this.role = role;
         this.platform = platform;
         this.createdDate = LocalDateTime.now();
-        this.memberInfo = memberInfo;
     }
 
     public Member setEmail(String email) {
@@ -73,8 +65,8 @@ public class Member {
         return this;
     }
 
-    public Member setPassword(String password) {
-        this.password = password;
+    public Member setName(String name) {
+        this.name = name;
         return this;
     }
 
@@ -86,9 +78,5 @@ public class Member {
     public Member setRole(RoleEnum role) {
         this.role = role;
         return this;
-    }
-
-    public void setMemberInfo(MemberInfoVO memberInfo) {
-        this.memberInfo = memberInfo;
     }
 }
