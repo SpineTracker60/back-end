@@ -37,6 +37,8 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     }
 
     // 토큰 생성할 때를 위한 userprincipal builder
+    // 예를들어 은행 사이트에 로그인 연장 버튼을 누를때는 토큰이 재발급 되는것이기때문에 유저 정보를 다시 불러오지 못해서
+    // attiribute 필드가 필요가 없다. (기능 명세에 따라 바뀔 수 있음 -> 연장 눌렀을 때 재 로그인 하게 하면 attribute 필요함)
     public static Builder builder(Long id, String role, String name) {
         return new Builder(id, role, name);
     }
@@ -128,7 +130,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
 }

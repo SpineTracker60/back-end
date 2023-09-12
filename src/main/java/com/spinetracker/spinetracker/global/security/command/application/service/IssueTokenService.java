@@ -3,7 +3,6 @@ package com.spinetracker.spinetracker.global.security.command.application.servic
 import com.spinetracker.spinetracker.domain.member.query.application.dto.FindMemberDTO;
 import com.spinetracker.spinetracker.global.security.command.domain.aggregate.entity.Token;
 import com.spinetracker.spinetracker.global.security.command.domain.aggregate.vo.MemberVO;
-import com.spinetracker.spinetracker.global.security.command.domain.exception.TokenNotFoundException;
 import com.spinetracker.spinetracker.global.security.command.domain.repository.TokenRepository;
 import com.spinetracker.spinetracker.global.security.command.domain.service.CustomTokenService;
 import com.spinetracker.spinetracker.global.security.command.domain.service.RequestMember;
@@ -48,7 +47,7 @@ public class IssueTokenService {
 
     public String issueTokenByAccessToken(String accessToken) {
         Token findToken = tokenRepository.findTokenByAccessToken(accessToken).orElseThrow(
-                () -> new TokenNotFoundException("해당 Access Token은 폐기된 토큰입니다.")
+                () -> new NullPointerException("해당 Access Token은 폐기된 토큰입니다.")
         );
         long memberId = findToken.getMember().getId();
 
