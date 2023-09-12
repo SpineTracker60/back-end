@@ -23,7 +23,7 @@ class CreateMemberServiceTest {
     @Autowired
     private CreateMemberService createMemberService;
 
-    private static Stream<Arguments> getCreateMemberByLocalInfo() {
+    private static Stream<Arguments> getCreateMemberInfo() {
         return Stream.of(
                 Arguments.of(
                         new CreateMemberDTO(
@@ -46,10 +46,10 @@ class CreateMemberServiceTest {
         );
     }
 
-    @DisplayName("CreateMemberByLocalDTO를 통해 사용자 생성이 되는지 확인")
+    @DisplayName("createMemberDTO를 통해 사용자 생성이 되는지 확인")
     @ParameterizedTest
-    @MethodSource("getCreateMemberByLocalInfo")
-    void createMemberByLocal(CreateMemberDTO createMemberDTO) {
+    @MethodSource("getCreateMemberInfo")
+    void createMember(CreateMemberDTO createMemberDTO) {
 
         Assertions.assertDoesNotThrow(
                 () -> createMemberService.createMember(createMemberDTO)

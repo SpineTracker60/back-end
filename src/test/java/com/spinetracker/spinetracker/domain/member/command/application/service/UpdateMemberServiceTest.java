@@ -19,7 +19,7 @@ class UpdateMemberServiceTest {
     @Autowired
     private UpdateMemberService updateMemberService;
 
-    private static Stream<Arguments> getUpdateMemberByLocalInfo() {
+    private static Stream<Arguments> getUpdateMemberInfo() {
         return Stream.of(
                 Arguments.of(
                         1L,
@@ -38,10 +38,10 @@ class UpdateMemberServiceTest {
         );
     }
 
-    @DisplayName("UpdateMemberByLocalDTO를 통해 사용자 정보 수정이 되는지 확인")
+    @DisplayName("updateMemberDTO를 통해 사용자 정보 수정이 되는지 확인")
     @ParameterizedTest
-    @MethodSource("getUpdateMemberByLocalInfo")
-    void updateMemberByLocal(Long memberId, UpdateMemberDTO updateMemberDTO) {
+    @MethodSource("getUpdateMemberInfo")
+    void updateMember(Long memberId, UpdateMemberDTO updateMemberDTO) {
 
         Assertions.assertDoesNotThrow(
                 () -> updateMemberService.updateMember(memberId, updateMemberDTO)
