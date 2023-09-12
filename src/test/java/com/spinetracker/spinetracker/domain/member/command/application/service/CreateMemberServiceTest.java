@@ -1,5 +1,6 @@
 package com.spinetracker.spinetracker.domain.member.command.application.service;
 
+import com.spinetracker.spinetracker.domain.member.command.application.dto.CreateMemberDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Stream;
 
+import static com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.PlatformEnum.GOOGLE;
+
 @SpringBootTest
 @Transactional
 class CreateMemberServiceTest {
@@ -23,23 +26,21 @@ class CreateMemberServiceTest {
     private static Stream<Arguments> getCreateMemberByLocalInfo() {
         return Stream.of(
                 Arguments.of(
-                        new CreateMemberByLocalDTO(
+                        new CreateMemberDTO(
                                 "email@test.com",
                                 "123456!@#",
-                                "효정",
-                                "FEMALE",
-                                "TEN",
-                                "학생"
+                                "profieimage",
+                                GOOGLE,
+                                "효정"
                         )
                 ),
                 Arguments.of(
-                        new CreateMemberByLocalDTO(
+                        new CreateMemberDTO(
                                 "email2@test.com",
                                 "test1234!",
-                                "지원",
-                                "MALE",
-                                "TWENTY",
-                                "학생"
+                                "profieimage",
+                                GOOGLE,
+                                "지원"
                         )
                 )
         );
@@ -48,10 +49,10 @@ class CreateMemberServiceTest {
     @DisplayName("CreateMemberByLocalDTO를 통해 사용자 생성이 되는지 확인")
     @ParameterizedTest
     @MethodSource("getCreateMemberByLocalInfo")
-    void createMemberByLocal(CreateMemberByLocalDTO createMemberByLocalDTO) {
+    void createMemberByLocal(CreateMemberDTO createMemberDTO) {
 
         Assertions.assertDoesNotThrow(
-                () -> createMemberService.createMemberByLocal(createMemberByLocalDTO)
+                () -> createMemberService.createMember(createMemberDTO)
         );
     }
 }
