@@ -2,5 +2,6 @@ package com.spinetracker.spinetracker.domain.member.command.domain.aggregate.ent
 
 public enum PlatformEnum {
 
-    GOOGLE
+    GOOGLE,
+    KAKAO
 }
