@@ -1,6 +1,6 @@
 package com.spinetracker.spinetracker.domain.member.command.application.service;
 
-import com.spinetracker.spinetracker.domain.member.command.application.dto.UpdateMemberByLocalDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.UpdateMemberDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Transactional
 class UpdateMemberServiceTest {
@@ -21,40 +19,32 @@ class UpdateMemberServiceTest {
     @Autowired
     private UpdateMemberService updateMemberService;
 
-    private static Stream<Arguments> getUpdateMemberByLocalInfo() {
+    private static Stream<Arguments> getUpdateMemberInfo() {
         return Stream.of(
                 Arguments.of(
                         1L,
-                        new UpdateMemberByLocalDTO(
-                                "123123123!@#",
-                                "차단된 사용자",
-                                "효정",
-                                "FEMALE",
-                                "TWENTY",
-                                "학생"
+                        new UpdateMemberDTO(
+                                "profileimage",
+                                "효정"
                         )
                 ),
                 Arguments.of(
                         2L,
-                        new UpdateMemberByLocalDTO(
-                                "TEST1234$$",
-                                "MEMBER",
-                                "지원",
-                                "MALE",
-                                "TEN",
-                                "대학생"
+                        new UpdateMemberDTO(
+                                "profileimage",
+                                "지원"
                         )
                 )
         );
     }
 
-    @DisplayName("UpdateMemberByLocalDTO를 통해 사용자 정보 수정이 되는지 확인")
+    @DisplayName("updateMemberDTO를 통해 사용자 정보 수정이 되는지 확인")
     @ParameterizedTest
-    @MethodSource("getUpdateMemberByLocalInfo")
-    void updateMemberByLocal(Long memberId, UpdateMemberByLocalDTO updateMemberByLocalDTO) {
+    @MethodSource("getUpdateMemberInfo")
+    void updateMember(Long memberId, UpdateMemberDTO updateMemberDTO) {
 
         Assertions.assertDoesNotThrow(
-                () -> updateMemberService.updateMemberByLocal(memberId, updateMemberByLocalDTO)
+                () -> updateMemberService.updateMember(memberId, updateMemberDTO)
         );
     }
 }
