@@ -90,7 +90,7 @@ public class SecurityConfiguration {
                                         "/api-docs", "/api-docs/**", "/v3/api-docs/**"
                                 )
                                 .antMatchers(
-                                        "/login/**","/auth/**"
+                                        "/login/**"
                                 )
                 )
                 .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll());
@@ -115,7 +115,7 @@ public class SecurityConfiguration {
                 .and()
 
                 .authorizeRequests()
-                    .antMatchers("/oauth2/**")
+                    .antMatchers("/oauth2/**", "/auth/**")
                         .hasRole(RoleEnum.MEMBER.name())
                 .antMatchers("/blog/**", "/member/**")
                     .permitAll()

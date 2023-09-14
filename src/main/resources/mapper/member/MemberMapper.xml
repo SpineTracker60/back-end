@@ -21,4 +21,12 @@
         WHERE
             uid = #{uid}
     </select>
+
+    <select id="findById" resultMap="MemberMap">
+        SELECT *
+        FROM
+            MEMBER_TB
+        WHERE
+            id = #{id}
+    </select>
 </mapper>

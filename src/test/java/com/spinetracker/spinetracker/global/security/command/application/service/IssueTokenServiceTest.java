@@ -3,13 +3,11 @@ package com.spinetracker.spinetracker.global.security.command.application.servic
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.RoleEnum;
 import com.spinetracker.spinetracker.global.security.command.domain.service.CustomTokenService;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
-import org.apache.catalina.User;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
