@@ -1,6 +1,5 @@
 package com.spinetracker.spinetracker.domain.member.query.application.service;
 
-import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.Member;
 import com.spinetracker.spinetracker.domain.member.query.application.dto.FindMemberDTO;
 import com.spinetracker.spinetracker.domain.member.query.domain.repository.MemberMapper;
 import com.spinetracker.spinetracker.global.exception.UserNotFoundException;

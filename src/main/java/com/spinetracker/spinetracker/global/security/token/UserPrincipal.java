@@ -19,40 +19,47 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     @Getter
     private final Long id;
     private final String role;
+    private final String name;
     private final Collection<? extends GrantedAuthority> authorities;
     private final Map<String, Object> attributes;
 
     private UserPrincipal(Builder builder) {
         this.id = builder.id;
         this.role = builder.role;
+        this.name = builder.name;
         this.authorities = builder.authorities;
         this.attributes = builder.attributes;
     }
 
-    public static Builder builder(Long id, String role, Map<String, Object> attributes) {
-        return new Builder(id, role);
+    // 실제 oauth2를 통한 userprincipal builder
+    public static Builder builder(Long id, String role, String name, Map<String, Object> attributes) {
+        return new Builder(id, role, name);
     }
 
-    public static Builder builder(Long id, String role) {
-        return new Builder(id, role);
+    // 토큰 생성할 때를 위한 userprincipal builder
+    public static Builder builder(Long id, String role, String name) {
+        return new Builder(id, role, name);
     }
 
     public static class Builder {
         private final Long id;
         private final String role;
+        private final String name;
         private final Collection<? extends GrantedAuthority> authorities;
         private Map<String, Object> attributes;
 
-        public Builder(Long id, String role, Map<String, Object> attributes) {
+        public Builder(Long id, String role, String name, Map<String, Object> attributes) {
             this.id = id;
             this.role = role;
+            this.name = name;
             this.authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
             this.attributes = attributes;
         }
 
-        public Builder(Long id, String role) {
+        public Builder(Long id, String role, String name) {
             this.id = id;
             this.role = role;
+            this.name = name;
             this.authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
         }
 
@@ -68,15 +75,15 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     }
 
     public static UserPrincipal create(Member member, Map<String, Object> attributes) {
-        return UserPrincipal.builder(member.getId(), RoleEnum.valueOf(member.getRole().name()).getKey(), attributes).build();
+        return UserPrincipal.builder(member.getId(), RoleEnum.valueOf(member.getRole().name()).getKey(), member.getName(), attributes).build();
     }
 
     public static UserPrincipal create(FindMemberDTO member, Map<String, Object> attributes) {
-        return UserPrincipal.builder(member.getId(), RoleEnum.valueOf(member.getRole()).getKey(), attributes).build();
+        return UserPrincipal.builder(member.getId(), RoleEnum.valueOf(member.getRole()).getKey(), member.getName(), attributes).build();
     }
 
     public static UserPrincipal create(FindMemberDTO member) {
-        return UserPrincipal.builder(member.getId(), RoleEnum.valueOf(member.getRole()).getKey()).build();
+        return UserPrincipal.builder(member.getId(), RoleEnum.valueOf(member.getRole()).getKey(), member.getName()).build();
     }
 
     @Override
@@ -96,7 +103,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return name;
     }
 
     @Override
