@@ -25,8 +25,8 @@ public class MemberInfo {
     private GenderEnum gender;
 
     @NotNull
-    @Embedded
-    private AgeRangeVO ageRange;
+    @Column(nullable = false, name="birth_date")
+    private LocalDate birthDate;
 
     @NotNull
     @Column(nullable = false, name="job")
@@ -40,7 +40,7 @@ public class MemberInfo {
 
     public MemberInfo(GenderEnum gender, LocalDate birthDate, String job, MemberVO memberVO) {
         this.gender = gender;
-        this.ageRange = new AgeRangeVO(birthDate);
+        this.birthDate = birthDate;
         this.job = job;
         this.memberVO = memberVO;
     }
@@ -50,13 +50,17 @@ public class MemberInfo {
         return this;
     }
 
-    public MemberInfo setAgeRange(AgeRangeVO ageRange) {
-        this.ageRange = ageRange;
+    public MemberInfo setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
         return this;
     }
 
     public MemberInfo setJob(String job) {
         this.job = job;
         return this;
+    }
+
+    public AgeRangeEnum getAgeRange() {
+        return new AgeRangeVO(this.birthDate).getAgeRange();
     }
 }
