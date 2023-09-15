@@ -32,7 +32,7 @@ public class CreateMemberService {
                 RoleEnum.valueOf(createMemberBySocialDTO.getRole()),
                 createMemberBySocialDTO.getPlatformEnum()
         );
-        requestChatroom.create(createdMemberBySocial.getId());
+        //requestChatroom.create(createdMemberBySocial.getId());
         return memberRepository.save(createdMemberBySocial);
     }
 }
