@@ -20,15 +20,15 @@ public class CreateMemberService {
 
     // 소셜 로그인 시
     @Transactional
-    public Member createMember(CreateMemberDTO createMemberBySocialDTO) {
-        Member createdMemberBySocial = new Member(
-                createMemberBySocialDTO.getEmail(),
-                createMemberBySocialDTO.getName(),
-                createMemberBySocialDTO.getUID(),
-                createMemberBySocialDTO.getProfileImage(),
-                RoleEnum.valueOf(createMemberBySocialDTO.getRole()),
-                createMemberBySocialDTO.getPlatformEnum()
+    public Member createMember(CreateMemberDTO createMemberDTO) {
+        Member createdMember = new Member(
+                createMemberDTO.getEmail(),
+                createMemberDTO.getName(),
+                createMemberDTO.getUID(),
+                createMemberDTO.getProfileImage(),
+                RoleEnum.valueOf(createMemberDTO.getRole()),
+                createMemberDTO.getPlatformEnum()
         );
-        return memberRepository.save(createdMemberBySocial);
+        return memberRepository.save(createdMember);
     }
 }
