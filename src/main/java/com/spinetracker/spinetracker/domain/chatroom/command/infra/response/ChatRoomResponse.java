@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Setter
 public class ChatRoomResponse implements Serializable {
     private Boolean success;
-    @JsonProperty("body")
+    @JsonProperty("results")
     private ChatRoomBody chatRoomBody;
 
     public ChatRoomResponse() {}
