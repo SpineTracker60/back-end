@@ -1,6 +1,7 @@
 package com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.vo;
 
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.AgeRangeEnum;
+import lombok.Getter;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -9,6 +10,7 @@ import javax.persistence.Enumerated;
 import java.time.LocalDate;
 
 @Embeddable
+@Getter
 public class AgeRangeVO {
 
     @Enumerated(EnumType.STRING)
