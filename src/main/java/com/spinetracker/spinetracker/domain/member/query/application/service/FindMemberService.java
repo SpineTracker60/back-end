@@ -6,6 +6,9 @@ import com.spinetracker.spinetracker.global.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class FindMemberService {
 
@@ -15,8 +18,11 @@ public class FindMemberService {
         this.memberMapper = memberMapper;
     }
 
-    public FindMemberDTO findByUID(String uid) {
-        FindMemberDTO findMember = memberMapper.findByUID(uid);
+    public FindMemberDTO findByUIDAndProvider(String uid, String provider) {
+        Map<String, String> params = new HashMap<>();
+        params.put("uid", uid);
+        params.put("platform", provider);
+        FindMemberDTO findMember = memberMapper.findByUIDAndProvider(params);
         if(findMember == null) {
             return null;
         } else {

@@ -5,6 +5,7 @@ import com.spinetracker.spinetracker.domain.member.query.application.dto.FindMem
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface MemberMapper {
@@ -12,7 +13,7 @@ public interface MemberMapper {
 
     FindMemberDTO findById(long id);
 
-    FindMemberDTO findByUID(String uid);
+    FindMemberDTO findByUIDAndProvider(Map<String, String> param);
 
     FindMemberDTO findByAccessToken(String accessToken);
 

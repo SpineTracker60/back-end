@@ -14,12 +14,15 @@
         <result property="email" column="email"/>
     </resultMap>
 
-    <select id="findByUID" resultMap="MemberMap">
+    <select id="findByUIDAndProvider" resultMap="MemberMap" parameterType="Map">
         SELECT *
         FROM
             MEMBER_TB
         WHERE
             uid = #{uid}
+          AND
+            platform = #{platform}
+
     </select>
 
     <select id="findById" resultMap="MemberMap">

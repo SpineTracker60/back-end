@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -36,6 +37,21 @@ class IssueTokenServiceTest {
         when(issueTokenService.issueTokenByUserPrincipal(userPrincipal)).thenReturn(anyString());
 
         Assertions.assertNotNull(issueTokenService.issueTokenByUserPrincipal(userPrincipal));
+    }
+
+    @DisplayName("잘못된 토큰 값 입력 시 IllegalArgumentException이 발생 하는지 테스트")
+    @Test
+    void testIllegalArgumentExceptionInIssueTokenByAccessToken() {
+        when(issueTokenService.issueTokenByAccessToken(""))
+                .thenThrow(new IllegalArgumentException());
+        assertThrows(IllegalArgumentException.class, () -> issueTokenService.issueTokenByAccessToken(""));
+    }
+
+    @DisplayName("Access Token을 통해 정상적으로 토큰 발행이 되는지 테스트")
+    @Test
+    void testIssueTokenByAccessToken() {
+        when(issueTokenService.issueTokenByAccessToken(defaultAccessToken)).thenReturn(anyString());
+        Assertions.assertNotNull(issueTokenService.issueTokenByAccessToken(defaultAccessToken));
     }
 
 }
