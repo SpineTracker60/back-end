@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum AgeRangeEnum {
-
+    UNDER_TEN("RANGE_UNDER_TEN", "10대 미만"),
     TEN("RANGE_TEN", "10대"),
     TWENTY("RANGE_TWENTY", "20대"),
     THIRSTY("RANGE_THIRSTY", "30대"),

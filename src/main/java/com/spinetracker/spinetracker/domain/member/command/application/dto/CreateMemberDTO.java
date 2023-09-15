@@ -24,8 +24,5 @@ public class CreateMemberDTO {
         this.role = "MEMBER";
         this.platformEnum = platformEnum;
         this.name = name;
-//        this.gender = gender;
-//        this.ageRange = ageRange;
-//        this.job = job;
     }
 }
