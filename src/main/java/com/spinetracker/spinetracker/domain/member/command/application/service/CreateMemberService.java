@@ -33,6 +33,6 @@ public class CreateMemberService {
                 createMemberDTO.getPlatformEnum()
         );
         //requestChatroom.create(createdMemberBySocial.getId());
-        return memberRepository.save(createdMemberBySocial);
+        return memberRepository.save(createdMember);
     }
 }
