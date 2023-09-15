@@ -1,5 +1,6 @@
 package com.spinetracker.spinetracker.domain.member.command.application.service;
 
+import com.spinetracker.spinetracker.domain.chatroom.command.domain.service.RequestChatroom;
 import com.spinetracker.spinetracker.domain.member.command.application.dto.CreateMemberDTO;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.Member;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.RoleEnum;
@@ -12,10 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class CreateMemberService {
 
     private final MemberRepository memberRepository;
+    private final RequestChatroom requestChatroom;
 
     @Autowired
-    public CreateMemberService(MemberRepository memberRepository) {
+    public CreateMemberService(MemberRepository memberRepository, RequestChatroom requestChatroom) {
         this.memberRepository = memberRepository;
+        this.requestChatroom = requestChatroom;
     }
 
     // 소셜 로그인 시
@@ -29,6 +32,7 @@ public class CreateMemberService {
                 RoleEnum.valueOf(createMemberDTO.getRole()),
                 createMemberDTO.getPlatformEnum()
         );
+        //requestChatroom.create(createdMemberBySocial.getId());
         return memberRepository.save(createdMember);
     }
 }
