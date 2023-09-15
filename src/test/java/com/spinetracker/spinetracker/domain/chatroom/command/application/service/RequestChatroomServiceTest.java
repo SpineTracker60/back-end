@@ -35,7 +35,7 @@ class RequestChatroomServiceTest {
     @DisplayName("memberId를 통해 채팅방이 생성되는지 확인")
     @ParameterizedTest
     @MethodSource("getMemberIdInfo")
-    void createChatRoomRequestTest(Long memberId) throws ParseException, JsonProcessingException {
+    void createChatRoomRequestTest(Long memberId) {
         FindChatroomDTO createdChatroomDTO = requestChatroomService.create(memberId);
     }
 }
