@@ -2,7 +2,6 @@ package com.spinetracker.spinetracker.domain.member.command.domain.aggregate.ent
 
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.PlatformEnum;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.RoleEnum;
-import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.vo.MemberInfoVO;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -42,13 +41,7 @@ public class Member {
     @Column(nullable = false, name="created_date")
     private LocalDateTime createdDate;
 
-//    @Embedded
-//    private MemberInfoVO memberInfo;
-
-
     protected Member() {}
-
-
 
     public Member(String email, String name, String UID, String profileImage, RoleEnum role, PlatformEnum platform) {
         this.email = email;

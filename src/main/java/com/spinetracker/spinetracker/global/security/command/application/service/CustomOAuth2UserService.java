@@ -35,22 +35,16 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(oAuth2UserRequest);
-        System.out.println("oAuth2User = " + oAuth2User);
         String registrationId = oAuth2UserRequest.getClientRegistration().getRegistrationId(); // 소셜 정보 가져옴
-        System.out.println("registrationId = " + registrationId);
 
         String userNameAttributeName = oAuth2UserRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
 
-        System.out.println("userNameAttributeName = " + oAuth2User.getAttributes().get("Name"));
-        System.out.println("oAuth2User.getAttributes().email = " + oAuth2User.getAttributes().get("email"));
-        System.out.println("oAuth2User = " + oAuth2User.getAttributes().get("properties"));
         OAuth2UserInfo attributes = OAuth2UserInfoFactory.getOAuth2UserInfo(registrationId, oAuth2User.getAttributes());
-        System.out.println("attributes = " + attributes);
         return saveOrUpdate(attributes, registrationId);
     }
 
     private UserPrincipal saveOrUpdate(OAuth2UserInfo attributes, String provider) {
-        FindMemberDTO member = findMemberService.findByUID(attributes.getId());
+        FindMemberDTO member = findMemberService.findByUIDAndProvider(attributes.getId(), provider);
         UserPrincipal oauthMember;
         if (member == null) {
             CreateMemberDTO createMemberDTO = new CreateMemberDTO(attributes.getEmail(), attributes.getId(), attributes.getImageUrl(), PlatformEnum.valueOf(provider.toUpperCase()), attributes.getName());

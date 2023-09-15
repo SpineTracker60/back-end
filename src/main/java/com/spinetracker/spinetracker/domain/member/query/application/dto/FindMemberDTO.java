@@ -1,6 +1,5 @@
 package com.spinetracker.spinetracker.domain.member.query.application.dto;
 
-import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.vo.MemberInfoVO;
 import lombok.Getter;
 import lombok.Setter;
 
