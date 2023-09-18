@@ -4,7 +4,6 @@ import com.spinetracker.spinetracker.domain.member.command.application.dto.Membe
 import com.spinetracker.spinetracker.domain.member.command.application.service.CreateMemberInfoService;
 import com.spinetracker.spinetracker.domain.member.command.application.service.DeleteMemberService;
 import com.spinetracker.spinetracker.domain.member.command.application.service.UpdateMemberInfoService;
-import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.Member;
 import com.spinetracker.spinetracker.global.common.response.ResponseDTO;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
@@ -20,12 +19,10 @@ public class MemberInfoController {
 
     private final CreateMemberInfoService createMemberInfoService;
     private final UpdateMemberInfoService updateMemberInfoService;
-    private final DeleteMemberService deleteMemberService;
     @Autowired
-    public MemberInfoController(CreateMemberInfoService createMemberInfoService, UpdateMemberInfoService updateMemberInfoService, DeleteMemberService deleteMemberService) {
+    public MemberInfoController(CreateMemberInfoService createMemberInfoService, UpdateMemberInfoService updateMemberInfoService) {
         this.createMemberInfoService = createMemberInfoService;
         this.updateMemberInfoService = updateMemberInfoService;
-        this.deleteMemberService = deleteMemberService;
     }
 
     // 회원가입시 사용자 정보 추가
@@ -52,18 +49,5 @@ public class MemberInfoController {
         }
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "변경 성공!!", updateMemberInfoService.updateMemberInfo(memberInfoDTO,memberId)));
-    }
-
-
-
-    // 회원 탈퇴
-    @DeleteMapping("/")
-    public ResponseEntity<ResponseDTO> deleteMemberInfo(@CurrentMember UserPrincipal userPrincipal) {
-
-        Long memberId = userPrincipal.getId();
-
-        deleteMemberService.delete(memberId);
-
-        return ResponseEntity.noContent().build();
     }
 }
