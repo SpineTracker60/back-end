@@ -4,7 +4,6 @@ import com.spinetracker.spinetracker.domain.member.command.application.dto.Membe
 import com.spinetracker.spinetracker.domain.member.command.application.service.CreateMemberInfoService;
 import com.spinetracker.spinetracker.domain.member.command.application.service.DeleteMemberService;
 import com.spinetracker.spinetracker.domain.member.command.application.service.UpdateMemberInfoService;
-import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.Member;
 import com.spinetracker.spinetracker.global.common.response.ResponseDTO;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
