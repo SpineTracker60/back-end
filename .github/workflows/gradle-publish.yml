@@ -16,12 +16,6 @@ on:
 permissions: write-all
 
 jobs:
-  trigger:
-    runs-on: ubuntu-latest
-    steps:
-      - run: gh api /repos/SpineTracker60/chat-server -f event_type='node_publish'
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
 
   build:
     runs-on: ubuntu-latest
