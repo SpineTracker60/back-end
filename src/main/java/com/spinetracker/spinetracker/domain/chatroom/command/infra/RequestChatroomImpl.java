@@ -3,6 +3,7 @@ package com.spinetracker.spinetracker.domain.chatroom.command.infra;
 import com.spinetracker.spinetracker.domain.chatroom.command.application.dto.FindChatroomDTO;
 import com.spinetracker.spinetracker.domain.chatroom.command.domain.service.RequestChatroom;
 import com.spinetracker.spinetracker.domain.chatroom.command.infra.response.ChatRoomBody;
+import com.spinetracker.spinetracker.domain.chatroom.command.infra.response.ChatRoomResponse;
 import com.spinetracker.spinetracker.domain.chatroom.command.infra.response.Response;
 import com.spinetracker.spinetracker.global.common.annotation.InfraService;
 import org.springframework.beans.factory.annotation.Value;
