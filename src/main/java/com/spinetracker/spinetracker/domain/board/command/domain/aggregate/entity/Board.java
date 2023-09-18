@@ -1,5 +1,7 @@
 package com.spinetracker.spinetracker.domain.board.command.domain.aggregate.entity;
 
+import com.spinetracker.spinetracker.domain.board.command.domain.aggregate.entity.vo.ProductVO;
+import com.spinetracker.spinetracker.domain.board.command.domain.aggregate.entity.vo.WriterVO;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -18,14 +20,14 @@ public class Board {
     @Column(length = 500, nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @Column(nullable = false)
-    private String writer;
+    @Embedded
+    private WriterVO writer;
 
-    @Column(nullable = true, name = "book_mark")
-    private boolean bookMark;
+    @Embedded
+    private ProductVO product;
 
     @Column(name = "board_is_deleted")
     private boolean boardIsDeleted;
@@ -36,14 +38,14 @@ public class Board {
 
     protected Board() {}
 
-    public Board(Long id, String title, String content, String writer, boolean bookMark, boolean boardIsDeleted, LocalDateTime createdDate) {
+    public Board(Long id, String title, String content, WriterVO writer, ProductVO product) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.writer = writer;
-        this.bookMark = bookMark;
-        this.boardIsDeleted = boardIsDeleted;
-        this.createdDate = createdDate;
+        this.product = product;
+        this.boardIsDeleted = false;        // 게시물 생성 시 default 가 false
+        this.createdDate = LocalDateTime.now();
     }
 
     public Board setTitle(String title) {
@@ -56,8 +58,8 @@ public class Board {
         return this;
     }
 
-    public Board setBookMark(boolean bookMark) {
-        this.bookMark = bookMark;
+    public Board setBoardIsDeleted(boolean boardIsDeleted) {
+        this.boardIsDeleted = boardIsDeleted;
         return this;
     }
 }
