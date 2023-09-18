@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 
 @RestController
 @RequestMapping("/member/info")
@@ -34,7 +36,7 @@ public class MemberInfoController {
             throw new RuntimeException("정보를 모두 입력해야 합니다.");
         }
 
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED, "추가 성공!!", createMemberInfoService.createMemberInfo(memberInfoDTO,memberId)));
+        return ResponseEntity.created(URI.create("/member/info")).body(new ResponseDTO(HttpStatus.CREATED, "추가 성공!!", createMemberInfoService.createMemberInfo(memberInfoDTO,memberId)));
     }
 
     // 마이페이지에서 사용자 정보 수정
