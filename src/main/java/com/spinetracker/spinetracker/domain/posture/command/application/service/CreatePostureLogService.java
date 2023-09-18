@@ -1,6 +1,7 @@
 package com.spinetracker.spinetracker.domain.posture.command.application.service;
 
-import com.spinetracker.spinetracker.domain.posture.command.application.dto.CreatePostureDTO;
+import com.spinetracker.spinetracker.domain.posture.command.application.dto.CreatePostureLogDTO;
+import com.spinetracker.spinetracker.domain.posture.command.application.dto.PostureBody;
 import com.spinetracker.spinetracker.domain.posture.command.domain.aggregate.entity.PostureLog;
 import com.spinetracker.spinetracker.domain.posture.command.domain.aggregate.enumtype.PostureTag;
 import com.spinetracker.spinetracker.domain.posture.command.domain.aggregate.vo.DateTimeVO;
@@ -8,6 +9,9 @@ import com.spinetracker.spinetracker.domain.posture.command.domain.aggregate.vo.
 import com.spinetracker.spinetracker.domain.posture.command.domain.repository.PostureLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CreatePostureLogService {
@@ -19,17 +23,21 @@ public class CreatePostureLogService {
         this.postureLogRepository = postureLogRepository;
     }
 
-    public PostureLog create(CreatePostureDTO createPostureDTO) {
+    public List<PostureLog> create(Long memberId, List<CreatePostureLogDTO> createPostureLogDTOList) {
 
-        MemberVO member = new MemberVO(createPostureDTO.getMemberId());
-        DateTimeVO dateTime = new DateTimeVO(
-                createPostureDTO.getDate(),
-                createPostureDTO.getStartTime(),
-                createPostureDTO.getEndTime()
-        );
-        PostureTag postureTag = PostureTag.valueOf(createPostureDTO.getPostureTag());
-        PostureLog newPostureLog = new PostureLog(member, postureTag, dateTime);
-
-        return postureLogRepository.save(newPostureLog);
+        List<PostureLog> postureLogList = new ArrayList<>();
+        for (CreatePostureLogDTO createPostureDto : createPostureLogDTOList) {
+            MemberVO member = new MemberVO(memberId);
+            DateTimeVO dateTime = new DateTimeVO(
+                    createPostureDto.getDate(),
+                    createPostureDto.getStartTime(),
+                    createPostureDto.getEndTime()
+            );
+            PostureTag postureTag = PostureTag.valueOf(createPostureDto.getPostureTag());
+            PostureLog newPostureLog = new PostureLog(member, postureTag, dateTime);
+            postureLogRepository.save(newPostureLog);
+            postureLogList.add(newPostureLog);
+        }
+        return postureLogList;
     };
 }
