@@ -2,6 +2,7 @@ package com.spinetracker.spinetracker.domain.member.command.application.controll
 
 import com.spinetracker.spinetracker.domain.member.command.application.dto.MemberInfoDTO;
 import com.spinetracker.spinetracker.domain.member.command.application.service.CreateMemberInfoService;
+import com.spinetracker.spinetracker.domain.member.command.application.service.DeleteMemberService;
 import com.spinetracker.spinetracker.domain.member.command.application.service.UpdateMemberInfoService;
 import com.spinetracker.spinetracker.global.common.response.ResponseDTO;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
@@ -51,10 +52,4 @@ public class MemberInfoController {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "변경 성공!!", updateMemberInfoService.updateMemberInfo(memberInfoDTO,memberId)));
     }
-
-
-
-    // 회원 탈퇴
-//    @DeleteMapping("/")
-
 }
