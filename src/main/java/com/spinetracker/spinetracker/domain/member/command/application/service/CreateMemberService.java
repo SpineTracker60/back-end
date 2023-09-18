@@ -13,12 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class CreateMemberService {
 
     private final MemberRepository memberRepository;
-    private final RequestChatroom requestChatroom;
+//    private final RequestChatroom requestChatroom;
 
     @Autowired
-    public CreateMemberService(MemberRepository memberRepository, RequestChatroom requestChatroom) {
+    public CreateMemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
-        this.requestChatroom = requestChatroom;
+//        this.requestChatroom = requestChatroom;
     }
 
     // 소셜 로그인 시
