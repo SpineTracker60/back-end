@@ -26,6 +26,7 @@ public class AuthController {
 
         Map<String, String> responseBody = new HashMap<>();
         responseBody.put("name", userPrincipal.getName());
+        responseBody.put("role", userPrincipal.getRole());
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 }
