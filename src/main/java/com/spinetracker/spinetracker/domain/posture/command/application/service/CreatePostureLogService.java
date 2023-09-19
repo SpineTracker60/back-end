@@ -23,21 +23,17 @@ public class CreatePostureLogService {
         this.postureLogRepository = postureLogRepository;
     }
 
-    public List<PostureLog> create(Long memberId, List<CreatePostureLogDTO> createPostureLogDTOList) {
+    public PostureLog create(Long memberId, CreatePostureLogDTO createPostureLogDTO) {
 
-        List<PostureLog> postureLogList = new ArrayList<>();
-        for (CreatePostureLogDTO createPostureDto : createPostureLogDTOList) {
-            MemberVO member = new MemberVO(memberId);
-            DateTimeVO dateTime = new DateTimeVO(
-                    createPostureDto.getDate(),
-                    createPostureDto.getStartTime(),
-                    createPostureDto.getEndTime()
-            );
-            PostureTag postureTag = PostureTag.valueOf(createPostureDto.getPostureTag());
-            PostureLog newPostureLog = new PostureLog(member, postureTag, dateTime);
-            postureLogRepository.save(newPostureLog);
-            postureLogList.add(newPostureLog);
-        }
-        return postureLogList;
+        MemberVO member = new MemberVO(memberId);
+        DateTimeVO dateTime = new DateTimeVO(
+                createPostureLogDTO.getDate(),
+                createPostureLogDTO.getStartTime(),
+                createPostureLogDTO.getEndTime()
+        );
+        PostureTag postureTag = PostureTag.valueOf(createPostureLogDTO.getPostureTag());
+        PostureLog newPostureLog = new PostureLog(member, postureTag, dateTime);
+        postureLogRepository.save(newPostureLog);
+        return newPostureLog;
     };
 }

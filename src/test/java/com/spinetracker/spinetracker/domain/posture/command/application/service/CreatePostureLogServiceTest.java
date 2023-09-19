@@ -43,7 +43,7 @@ class CreatePostureLogServiceTest {
     @DisplayName("자세 로그 생성 DTO를 통해 생성이 되는지 확인")
     @ParameterizedTest
     @MethodSource("getPostureInfo")
-    void create(List<CreatePostureLogDTO> createPostureLogDTO) {
+    void create(CreatePostureLogDTO createPostureLogDTO) {
         Assertions.assertDoesNotThrow(
                 () -> createPostureLogService.create(0L, createPostureLogDTO)
         );

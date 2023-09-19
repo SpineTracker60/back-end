@@ -31,10 +31,14 @@ public class CreatePostureController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponsePosture> create(@RequestBody List<CreatePostureLogDTO> createPostureLogDTO, @CurrentMember UserPrincipal userPrincipal) {
+    public ResponseEntity<ResponsePosture> create(@RequestBody List<CreatePostureLogDTO> createPostureLogDTOList, @CurrentMember UserPrincipal userPrincipal) {
 
         Long memberId = userPrincipal.getId();
-        List<PostureLog> createdPostureLogList = createPostureLogService.create(memberId, createPostureLogDTO);
+        List<PostureLog> createdPostureLogList = new ArrayList<>();
+        for(CreatePostureLogDTO createPostureLogDTO: createPostureLogDTOList) {
+            createdPostureLogList.add(createPostureLogService.create(memberId, createPostureLogDTO));
+        }
+
         List<PostureBody> postureBodyList = getPostureBodies(createdPostureLogList);
         ResponsePosture responsePosture = new ResponsePosture(
                 ! postureBodyList.isEmpty(),
