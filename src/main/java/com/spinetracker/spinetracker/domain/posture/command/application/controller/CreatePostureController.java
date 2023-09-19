@@ -1,6 +1,5 @@
 package com.spinetracker.spinetracker.domain.posture.command.application.controller;
 
-import com.spinetracker.spinetracker.domain.chatroom.command.infra.response.Response;
 import com.spinetracker.spinetracker.domain.posture.command.application.dto.CreatePostureLogDTO;
 import com.spinetracker.spinetracker.domain.posture.command.application.dto.PostureBody;
 import com.spinetracker.spinetracker.domain.posture.command.application.dto.ResponsePosture;
@@ -8,17 +7,25 @@ import com.spinetracker.spinetracker.domain.posture.command.application.service.
 import com.spinetracker.spinetracker.domain.posture.command.domain.aggregate.entity.PostureLog;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+@Tag(name = "PostureLog", description = "자세 기록 API")
 @RestController
 @RequestMapping("/posture")
 public class CreatePostureController {
@@ -30,8 +37,21 @@ public class CreatePostureController {
         this.createPostureLogService = createPostureLogService;
     }
 
-    @PostMapping
-    public ResponseEntity<ResponsePosture> create(@RequestBody List<CreatePostureLogDTO> createPostureLogDTOList, @CurrentMember UserPrincipal userPrincipal) {
+    // 메서드 정보
+    @Operation(
+            summary = "자세 기록 생성",
+            description = "토큰을 기반으로 사용자의 새로운 자세 트래킹 정보를 셍성합니다."
+    )
+    // response 정보
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = ResponsePosture.class))}),
+            //@ApiResponse(code = 204, message = "member not exists"),
+    })
+    @PostMapping("/")
+    public ResponseEntity<ResponsePosture> create(
+            @RequestBody List<CreatePostureLogDTO> createPostureLogDTOList,
+            @CurrentMember UserPrincipal userPrincipal
+    ) {
 
         Long memberId = userPrincipal.getId();
         List<PostureLog> createdPostureLogList = new ArrayList<>();
