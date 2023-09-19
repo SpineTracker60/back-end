@@ -38,8 +38,7 @@ public class Board {
 
     protected Board() {}
 
-    public Board(Long id, String title, String content, WriterVO writer, ProductVO product) {
-        this.id = id;
+    public Board(String title, String content, WriterVO writer, ProductVO product) {
         this.title = title;
         this.content = content;
         this.writer = writer;
