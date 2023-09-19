@@ -2,7 +2,6 @@ package com.spinetracker.spinetracker.domain.member.command.application.controll
 
 import com.spinetracker.spinetracker.domain.member.command.application.dto.MemberInfoDTO;
 import com.spinetracker.spinetracker.domain.member.command.application.service.CreateMemberInfoService;
-import com.spinetracker.spinetracker.domain.member.command.application.service.DeleteMemberService;
 import com.spinetracker.spinetracker.domain.member.command.application.service.UpdateMemberInfoService;
 import com.spinetracker.spinetracker.global.common.response.ResponseDTO;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
@@ -28,7 +27,7 @@ public class MemberInfoController {
     }
 
     // 회원가입시 사용자 정보 추가
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<ResponseDTO> createMemberInfo(@RequestBody MemberInfoDTO memberInfoDTO, @CurrentMember UserPrincipal userPrincipal) {
 
         Long memberId = userPrincipal.getId();
@@ -41,7 +40,7 @@ public class MemberInfoController {
     }
 
     // 마이페이지에서 사용자 정보 수정
-    @PutMapping("/")
+    @PutMapping
     public ResponseEntity<ResponseDTO> updateMemberInfo(@RequestBody MemberInfoDTO memberInfoDTO, @CurrentMember UserPrincipal userPrincipal) {
 
         Long memberId = userPrincipal.getId();

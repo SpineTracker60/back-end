@@ -2,7 +2,6 @@ package com.spinetracker.spinetracker.domain.member.command.application.controll
 
 import com.spinetracker.spinetracker.domain.member.command.application.service.DeleteMemberService;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
-import com.spinetracker.spinetracker.global.common.response.ResponseDTO;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +21,8 @@ public class MemberController {
     }
 
     // 회원 탈퇴
-    @DeleteMapping("/")
-    public ResponseEntity<ResponseDTO> deleteMemberInfo(@CurrentMember UserPrincipal userPrincipal) {
+    @DeleteMapping
+    public ResponseEntity<Void> deleteMemberInfo(@CurrentMember UserPrincipal userPrincipal) {
 
         Long memberId = userPrincipal.getId();
 

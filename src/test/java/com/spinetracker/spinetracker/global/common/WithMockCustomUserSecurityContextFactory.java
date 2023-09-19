@@ -2,11 +2,8 @@ package com.spinetracker.spinetracker.global.common;
 
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.AgeRangeEnum;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.GenderEnum;
-import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.PlatformEnum;
-import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.RoleEnum;
 import com.spinetracker.spinetracker.domain.member.query.application.dto.FindMemberDTO;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
-import org.apache.catalina.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -19,7 +16,7 @@ public class WithMockCustomUserSecurityContextFactory implements WithSecurityCon
         SecurityContext context = SecurityContextHolder.createEmptyContext();
 
         FindMemberDTO mockFindMemberDTO = new FindMemberDTO(
-                0L,
+                Long.parseLong(annotation.id()),
                 "mockName",
                 GenderEnum.FEMALE.name(),
                 AgeRangeEnum.FIFTY.name(),
