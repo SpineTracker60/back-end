@@ -22,8 +22,8 @@ public class MemberController {
     }
 
     // 회원 탈퇴
-    @DeleteMapping("/")
-    public ResponseEntity<ResponseDTO> deleteMemberInfo(@CurrentMember UserPrincipal userPrincipal) {
+    @DeleteMapping
+    public ResponseEntity<Void> deleteMemberInfo(@CurrentMember UserPrincipal userPrincipal) {
 
         Long memberId = userPrincipal.getId();
 

@@ -12,6 +12,8 @@ public class MemberInfoDTO {
     private LocalDate birthdate;
     private String job;
 
+    public MemberInfoDTO() {}
+
     public MemberInfoDTO(String gender, LocalDate birthdate, String job) {
         this.gender = gender;
         this.birthdate = birthdate;
