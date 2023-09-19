@@ -2,7 +2,6 @@ package com.spinetracker.spinetracker.domain.member.command.application.controll
 
 import com.spinetracker.spinetracker.domain.member.command.application.service.DeleteMemberService;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
-import com.spinetracker.spinetracker.global.common.response.ResponseDTO;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

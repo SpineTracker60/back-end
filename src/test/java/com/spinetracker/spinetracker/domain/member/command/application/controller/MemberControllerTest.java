@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.Member;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.PlatformEnum;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.RoleEnum;
-import com.spinetracker.spinetracker.domain.member.command.domain.repository.MemberRepository;
 import com.spinetracker.spinetracker.domain.member.command.domain.service.RequestUnlinkMember;
-import com.spinetracker.spinetracker.domain.member.query.application.service.FindMemberService;
 import com.spinetracker.spinetracker.global.common.WithMockCustomUser;
 import com.spinetracker.spinetracker.global.filter.TokenAuthenticationFilter;
 import com.spinetracker.spinetracker.global.security.command.application.service.CustomUserDetailService;
@@ -23,6 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 
@@ -34,6 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class MemberControllerTest {
 
     @Autowired
