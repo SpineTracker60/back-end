@@ -86,8 +86,11 @@ public class SecurityConfiguration {
                                         "/**/*.html", "/**/*.css", "/**/*.js"
                                 )
                                 .antMatchers(
-                                        "/swagger", "/swagger-ui.html", "/swagger-ui/**",
-                                        "/api-docs", "/api-docs/**", "/v3/api-docs/**"
+                                        "/api-docs",
+                                        "/v2/api-docs",  "/v3/api-docs","/configuration/ui",
+                                        "/swagger-resources/**", "/configuration/security",
+                                        "/swagger-ui.html", "/webjars/**","/swagger/**",
+                                        "/swagger-ui/**", "/swagger","/webjars/**"
                                 )
                                 .antMatchers(
                                         "/login/**"
