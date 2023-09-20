@@ -27,6 +27,7 @@ class CreateMemberInfoServiceTest {
                 Arguments.of(
                         1L,
                         new MemberInfoDTO(
+                                1L,
                                 "FEMALE",
                                 LocalDate.now(),
                                 "학생"
@@ -35,6 +36,7 @@ class CreateMemberInfoServiceTest {
                 Arguments.of(
                         2L,
                         new MemberInfoDTO(
+                                2L,
                                 "MALE",
                                 LocalDate.parse("2023-09-15"),
                                 "학생"

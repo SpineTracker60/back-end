@@ -36,7 +36,10 @@ public class MemberInfoController {
             throw new RuntimeException("정보를 모두 입력해야 합니다.");
         }
 
-        return ResponseEntity.created(URI.create("/member/info")).body(new ResponseDTO(HttpStatus.CREATED, "추가 성공!!", createMemberInfoService.createMemberInfo(memberInfoDTO,memberId)));
+        return ResponseEntity.created(URI.create("/member/info"))
+                .body(new ResponseDTO(HttpStatus.CREATED,
+                        "추가 성공!!", createMemberInfoService.createMemberInfo(memberInfoDTO,memberId))
+                );
     }
 
     // 마이페이지에서 사용자 정보 수정
@@ -49,6 +52,10 @@ public class MemberInfoController {
             throw new RuntimeException("정보를 모두 입력해야 합니다.");
         }
 
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "변경 성공!!", updateMemberInfoService.updateMemberInfo(memberInfoDTO,memberId)));
+        return ResponseEntity.ok()
+                .body(new ResponseDTO(HttpStatus.OK,
+                        "변경 성공!!",
+                        updateMemberInfoService.updateMemberInfo(memberInfoDTO,memberId))
+                );
     }
 }

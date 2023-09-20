@@ -64,6 +64,7 @@ class MemberInfoControllerTest {
         return Stream.of(
                 Arguments.of(
                         new MemberInfoDTO(
+                                1L,
                         "FEMALE",
                         LocalDate.parse("1995-06-04"),
                         "학생"

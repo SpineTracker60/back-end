@@ -1,8 +1,11 @@
 package com.spinetracker.spinetracker.domain.member.query.application.service;
 
 import com.spinetracker.spinetracker.domain.member.command.application.dto.CreateMemberDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.MemberInfoDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.service.CreateMemberInfoService;
 import com.spinetracker.spinetracker.domain.member.command.application.service.CreateMemberService;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.Member;
+import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.MemberInfo;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.PlatformEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,12 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
-@Transactional
 class FindMemberServiceTest {
 
     @Autowired
@@ -26,6 +27,9 @@ class FindMemberServiceTest {
 
     @Autowired
     private FindMemberService findMemberService;
+
+    @Autowired
+    private CreateMemberInfoService createMemberInfoService;
 
     private static Stream<Arguments> getMemberInfo() {
         return Stream.of(
@@ -39,20 +43,32 @@ class FindMemberServiceTest {
                         )
                 ),
                 Arguments.of(
-                        new CreateMemberDTO(
-                                "email2@test.com",
-                                "123456@@",
-                                "profileImage",
-                                PlatformEnum.KAKAO,
-                                "효정"
+                        new MemberInfoDTO(
+                                1L,
+                                "FEMALE",
+                                LocalDate.parse("1995-06-04"),
+                                "학생"
                         )
                 )
         );
     }
 
+    private static Stream<Arguments> isAddedInformation() {
+            return Stream.of(
+                    Arguments.of(
+                            new MemberInfoDTO(
+                                    1L,
+                                    "FEMALE",
+                                    LocalDate.parse("1995-06-04"),
+                                    "학생"
+                            )
+                    ));
+        }
+
     @DisplayName("UID를 통해 생성이 되는지 확인")
     @ParameterizedTest
     @MethodSource("getMemberInfo")
+    @Transactional
     void findByUID(CreateMemberDTO createMemberDTO) {
         createMemberService.createMember(createMemberDTO);
 
@@ -62,9 +78,22 @@ class FindMemberServiceTest {
     @DisplayName("Id를 통해 생성이 되는지 확인")
     @ParameterizedTest
     @MethodSource("getMemberInfo")
+    @Transactional
     void findById(CreateMemberDTO createMemberDTO) {
         Member createdMember = createMemberService.createMember(createMemberDTO);
 
         Assertions.assertNotNull(findMemberService.findById(createdMember.getId()));
+    }
+
+    @DisplayName("회원가입 시 추가 정보 입력 여부 확인")
+    @ParameterizedTest
+    @MethodSource("isAddedInformation")
+    void isAddedInformation(MemberInfoDTO memberInfoDTO) {
+
+        Long memberId = 1L;
+
+        MemberInfo createdMemberInfo = createMemberInfoService.createMemberInfo(memberInfoDTO, memberId);
+
+        Assertions.assertTrue(findMemberService.isAddedInformation(createdMemberInfo.getMemberVO().getMemberId()));
     }
 }

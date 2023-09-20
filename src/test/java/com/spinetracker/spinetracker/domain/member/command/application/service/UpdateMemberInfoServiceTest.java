@@ -27,6 +27,7 @@ class UpdateMemberInfoServiceTest {
                 Arguments.of(
                         1L,
                         new MemberInfoDTO(
+                                1L,
                                 "FEMALE",
                                 LocalDate.parse("1995-06-04"),
                                 "학생"
@@ -35,6 +36,7 @@ class UpdateMemberInfoServiceTest {
                 ),Arguments.of(
                         2L,
                         new MemberInfoDTO(
+                                2L,
                                 "MALE",
                                 LocalDate.parse("1995-06-04"),
                                 "대학생"
