@@ -7,32 +7,32 @@ import java.time.LocalDate;
 
 @Getter
 @ToString
-public class MemberInfoDTO {
+public class FindMemberInfoDTO {
     private Long id;
     private String gender;
     private LocalDate birthdate;
     private String job;
 
-    public MemberInfoDTO() {}
+    public FindMemberInfoDTO() {}
 
-    public MemberInfoDTO(Long id, String gender, LocalDate birthdate, String job) {
+    public FindMemberInfoDTO(Long id, String gender, LocalDate birthdate, String job) {
         this.id = id;
         this.gender = gender;
         this.birthdate = birthdate;
         this.job = job;
     }
 
-    public MemberInfoDTO setGender(String gender) {
+    public FindMemberInfoDTO setGender(String gender) {
         this.gender = gender;
         return this;
     }
 
-    public MemberInfoDTO setAgeRange(LocalDate birthdate) {
+    public FindMemberInfoDTO setAgeRange(LocalDate birthdate) {
         this.birthdate = birthdate;
         return this;
     }
 
-    public MemberInfoDTO setJob(String job) {
+    public FindMemberInfoDTO setJob(String job) {
         this.job = job;
         return this;
     }

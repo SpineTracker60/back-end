@@ -1,6 +1,7 @@
 package com.spinetracker.spinetracker.domain.member.command.application.service;
 
-import com.spinetracker.spinetracker.domain.member.command.application.dto.MemberInfoDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.CreateMemberInfoDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.FindMemberInfoDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Transactional
 class CreateMemberInfoServiceTest {
@@ -26,8 +25,7 @@ class CreateMemberInfoServiceTest {
         return Stream.of(
                 Arguments.of(
                         1L,
-                        new MemberInfoDTO(
-                                1L,
+                        new CreateMemberInfoDTO(
                                 "FEMALE",
                                 LocalDate.now(),
                                 "학생"
@@ -35,8 +33,7 @@ class CreateMemberInfoServiceTest {
                 ),
                 Arguments.of(
                         2L,
-                        new MemberInfoDTO(
-                                2L,
+                        new CreateMemberInfoDTO(
                                 "MALE",
                                 LocalDate.parse("2023-09-15"),
                                 "학생"
@@ -48,7 +45,7 @@ class CreateMemberInfoServiceTest {
     @DisplayName("MemberInfoDTO를 통해 사용자 생성이 되는지 확인")
     @ParameterizedTest
     @MethodSource("getCreateMemberInfo")
-    void createMemberInfo(Long memberId, MemberInfoDTO memberInfoDTO) {
+    void createMemberInfo(Long memberId, CreateMemberInfoDTO memberInfoDTO) {
 
         Assertions.assertDoesNotThrow(
                 () -> createMemberInfoService.createMemberInfo(memberInfoDTO, memberId)

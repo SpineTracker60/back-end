@@ -1,7 +1,8 @@
 package com.spinetracker.spinetracker.domain.member.query.application.service;
 
 import com.spinetracker.spinetracker.domain.member.command.application.dto.CreateMemberDTO;
-import com.spinetracker.spinetracker.domain.member.command.application.dto.MemberInfoDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.CreateMemberInfoDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.FindMemberInfoDTO;
 import com.spinetracker.spinetracker.domain.member.command.application.service.CreateMemberInfoService;
 import com.spinetracker.spinetracker.domain.member.command.application.service.CreateMemberService;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.Member;
@@ -49,8 +50,7 @@ class FindMemberServiceTest {
     private static Stream<Arguments> isAddedInformation() {
             return Stream.of(
                     Arguments.of(
-                            new MemberInfoDTO(
-                                    1L,
+                            new CreateMemberInfoDTO(
                                     "FEMALE",
                                     LocalDate.parse("1995-06-04"),
                                     "학생"
@@ -82,7 +82,7 @@ class FindMemberServiceTest {
     @ParameterizedTest
     @MethodSource("isAddedInformation")
     @Transactional
-    void isAddedInformation(MemberInfoDTO memberInfoDTO) {
+    void isAddedInformation(CreateMemberInfoDTO memberInfoDTO) {
 
         Long memberId = 1L;
 

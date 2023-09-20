@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/fing/member")
+@RequestMapping("/member")
 public class FindMemberInfoController {
 
     private final FindMemberService findMemberService;
@@ -23,7 +23,7 @@ public class FindMemberInfoController {
     }
 
     // 회원가입 시 추가 정보 입력 여부 확인 조회
-    @GetMapping
+    @GetMapping("info/added")
     public ResponseEntity<ResponseDTO> addMemberInfo(@CurrentMember UserPrincipal userPrincipal) {
 
         Long memberId = userPrincipal.getId();

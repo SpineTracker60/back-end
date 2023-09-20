@@ -1,6 +1,7 @@
 package com.spinetracker.spinetracker.domain.member.command.application.controller;
 
-import com.spinetracker.spinetracker.domain.member.command.application.dto.MemberInfoDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.CreateMemberInfoDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.FindMemberInfoDTO;
 import com.spinetracker.spinetracker.domain.member.command.application.service.CreateMemberInfoService;
 import com.spinetracker.spinetracker.domain.member.command.application.service.UpdateMemberInfoService;
 import com.spinetracker.spinetracker.global.common.response.ResponseDTO;
@@ -26,25 +27,25 @@ public class MemberInfoController {
         this.updateMemberInfoService = updateMemberInfoService;
     }
 
-    // 회원가입시 사용자 정보 추가
-    @PostMapping
-    public ResponseEntity<ResponseDTO> createMemberInfo(@RequestBody MemberInfoDTO memberInfoDTO, @CurrentMember UserPrincipal userPrincipal) {
-
-        Long memberId = userPrincipal.getId();
-
-        if (memberInfoDTO.getGender() == null || memberInfoDTO.getBirthdate() == null || memberInfoDTO.getJob() == null) {
-            throw new RuntimeException("정보를 모두 입력해야 합니다.");
-        }
-
-        return ResponseEntity.created(URI.create("/member/info"))
-                .body(new ResponseDTO(HttpStatus.CREATED,
-                        "추가 성공!!", createMemberInfoService.createMemberInfo(memberInfoDTO,memberId))
-                );
-    }
+//    // 회원가입시 사용자 정보 추가
+//    @PostMapping
+//    public ResponseEntity<ResponseDTO> createMemberInfo(@RequestBody CreateMemberInfoDTO memberInfoDTO, @CurrentMember UserPrincipal userPrincipal) {
+//
+//        Long memberId = userPrincipal.getId();
+//
+//        if (memberInfoDTO.getGender() == null || memberInfoDTO.getBirthdate() == null || memberInfoDTO.getJob() == null) {
+//            throw new RuntimeException("정보를 모두 입력해야 합니다.");
+//        }
+//
+//        return ResponseEntity.created(URI.create("/member/info"))
+//                .body(new ResponseDTO(HttpStatus.CREATED,
+//                        "추가 성공!!", createMemberInfoService.createMemberInfo(memberInfoDTO,memberId))
+//                );
+//    }
 
     // 마이페이지에서 사용자 정보 수정
     @PutMapping
-    public ResponseEntity<ResponseDTO> updateMemberInfo(@RequestBody MemberInfoDTO memberInfoDTO, @CurrentMember UserPrincipal userPrincipal) {
+    public ResponseEntity<ResponseDTO> updateMemberInfo(@RequestBody FindMemberInfoDTO memberInfoDTO, @CurrentMember UserPrincipal userPrincipal) {
 
         Long memberId = userPrincipal.getId();
 

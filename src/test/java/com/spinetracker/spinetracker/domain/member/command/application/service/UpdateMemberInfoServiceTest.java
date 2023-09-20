@@ -1,6 +1,6 @@
 package com.spinetracker.spinetracker.domain.member.command.application.service;
 
-import com.spinetracker.spinetracker.domain.member.command.application.dto.MemberInfoDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.FindMemberInfoDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Transactional
 class UpdateMemberInfoServiceTest {
@@ -26,7 +24,7 @@ class UpdateMemberInfoServiceTest {
         return Stream.of(
                 Arguments.of(
                         1L,
-                        new MemberInfoDTO(
+                        new FindMemberInfoDTO(
                                 1L,
                                 "FEMALE",
                                 LocalDate.parse("1995-06-04"),
@@ -35,7 +33,7 @@ class UpdateMemberInfoServiceTest {
                         )
                 ),Arguments.of(
                         2L,
-                        new MemberInfoDTO(
+                        new FindMemberInfoDTO(
                                 2L,
                                 "MALE",
                                 LocalDate.parse("1995-06-04"),
@@ -49,7 +47,7 @@ class UpdateMemberInfoServiceTest {
     @DisplayName("MemberInfoDTO를 통해 사용자 수정이 되는지 확인")
     @ParameterizedTest
     @MethodSource("getUpdateMemberInfo")
-    void updateMemberInfo(Long memberId, MemberInfoDTO memberInfoDTO) {
+    void updateMemberInfo(Long memberId, FindMemberInfoDTO memberInfoDTO) {
 
         Assertions.assertDoesNotThrow(
                 () -> updateMemberInfoService.updateMemberInfo(memberInfoDTO, memberId)

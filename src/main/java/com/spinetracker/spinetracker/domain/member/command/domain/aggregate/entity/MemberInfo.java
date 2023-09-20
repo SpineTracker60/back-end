@@ -19,17 +19,15 @@ public class MemberInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, name="gender")
+    @Column(nullable = true, name="gender")
     private GenderEnum gender;
 
-    @NotNull
-    @Column(nullable = false, name="birth_date")
+    @Column(nullable = true, name="birth_date")
     private LocalDate birthDate;
 
-    @NotNull
-    @Column(nullable = false, name="job")
+    @Column(nullable = true, name="job")
     private String job;
 
     @Embedded
