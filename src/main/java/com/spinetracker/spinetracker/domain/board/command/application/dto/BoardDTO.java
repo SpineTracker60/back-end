@@ -12,12 +12,12 @@ public class BoardDTO {
     private String productUrl;
     private boolean boardIsDeleted;
 
-    public BoardDTO(String title, String content, String productId, String productUrl, boolean boardIsDeleted) {
+    public BoardDTO(String title, String content, String productId, String productUrl) {
         this.title = title;
         this.content = content;
         this.productId = productId;
         this.productUrl = productUrl;
-        this.boardIsDeleted = boardIsDeleted;
+        this.boardIsDeleted = false;
     }
 
     public BoardDTO setTitle(String title) {

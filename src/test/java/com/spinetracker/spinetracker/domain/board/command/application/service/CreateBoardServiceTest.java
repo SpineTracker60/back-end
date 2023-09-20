@@ -26,10 +26,10 @@ class CreateBoardServiceTest {
                                 "글 제목",
                                 "글 내용",
                                 "효정",
-                                "상품",
-                                false)
+                                "상품"
                                 )
-                        );
+                        )
+        );
 
     }
 
