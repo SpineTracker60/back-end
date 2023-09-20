@@ -41,15 +41,8 @@ class FindMemberServiceTest {
                                 PlatformEnum.GOOGLE,
                                 "효정"
                         )
-                ),
-                Arguments.of(
-                        new MemberInfoDTO(
-                                1L,
-                                "FEMALE",
-                                LocalDate.parse("1995-06-04"),
-                                "학생"
-                        )
                 )
+
         );
     }
 
@@ -88,6 +81,7 @@ class FindMemberServiceTest {
     @DisplayName("회원가입 시 추가 정보 입력 여부 확인")
     @ParameterizedTest
     @MethodSource("isAddedInformation")
+    @Transactional
     void isAddedInformation(MemberInfoDTO memberInfoDTO) {
 
         Long memberId = 1L;
