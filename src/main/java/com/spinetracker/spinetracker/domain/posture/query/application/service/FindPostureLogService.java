@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoField;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,5 +28,24 @@ public class FindPostureLogService {
         params.put("todayDate", LocalDate.now());
 
         return postureLogMapper.findDailyPosture(params);
+    }
+
+    public List<FindPostureLogDTO> findWeeklyByMemberId(Long memberId) {
+
+        LocalDate today = LocalDate.now();
+
+        int day = today.get(ChronoField.DAY_OF_WEEK);
+        if (day == 7) {
+            day = 0;
+        }
+        LocalDate startDate = today.minusDays(day);
+        LocalDate endDate = startDate.plusDays(6);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("memberId", memberId);
+        params.put("startDate", startDate);
+        params.put("endDate", endDate);
+
+        return postureLogMapper.findWeekly(params);
     }
 }
