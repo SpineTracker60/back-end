@@ -1,10 +1,8 @@
 package com.spinetracker.spinetracker.domain.member.query.application.controller;
 
-import com.spinetracker.spinetracker.domain.member.command.application.dto.MemberInfoDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.CheckMemberInfoAddedDTO;
 import com.spinetracker.spinetracker.domain.member.query.application.service.FindMemberService;
-import com.spinetracker.spinetracker.domain.posture.command.application.dto.ResponsePosture;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
-import com.spinetracker.spinetracker.global.common.response.ResponseDTO;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,7 +11,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,19 +35,16 @@ public class FindMemberInfoController {
     )
     // response 정보
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = MemberInfoDTO.class))}),
+            @ApiResponse(responseCode = "200", description = "OK", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = CheckMemberInfoAddedDTO.class))}),
     })
     @GetMapping("/info/added")
-    public ResponseEntity<ResponseDTO> addMemberInfo(@CurrentMember UserPrincipal userPrincipal) {
+    public ResponseEntity<CheckMemberInfoAddedDTO> addMemberInfo(@CurrentMember UserPrincipal userPrincipal) {
 
         Long memberId = userPrincipal.getId();
 
         return ResponseEntity.ok()
-                .body(
-                        new ResponseDTO(HttpStatus.OK,
-                                "성공!!",
-                                findMemberService.isAddedInformation(memberId)
-                        )
+                .body(new CheckMemberInfoAddedDTO(
+                        findMemberService.isAddedInformation(memberId))
                 );
     }
 }
