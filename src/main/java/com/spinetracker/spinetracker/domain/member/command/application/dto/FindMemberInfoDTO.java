@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
-public class MemberInfoDTO {
+public class FindMemberInfoDTO {
 
     @Schema(type = "Long", example = "1", description = "사용자 정보 번호 입니다.")
     private Long id;
@@ -33,26 +33,26 @@ public class MemberInfoDTO {
     @NotNull
     private String job;
 
-    public MemberInfoDTO() {}
+    public FindMemberInfoDTO() {}
 
-    public MemberInfoDTO(Long id, String gender, LocalDate birthdate, String job) {
+    public FindMemberInfoDTO(Long id, String gender, LocalDate birthdate, String job) {
         this.id = id;
         this.gender = gender;
         this.birthdate = birthdate;
         this.job = job;
     }
 
-    public MemberInfoDTO setGender(String gender) {
+    public FindMemberInfoDTO setGender(String gender) {
         this.gender = gender;
         return this;
     }
 
-    public MemberInfoDTO setBirthdate(LocalDate birthdate) {
+    public FindMemberInfoDTO setAgeRange(LocalDate birthdate) {
         this.birthdate = birthdate;
         return this;
     }
 
-    public MemberInfoDTO setJob(String job) {
+    public FindMemberInfoDTO setJob(String job) {
         this.job = job;
         return this;
     }

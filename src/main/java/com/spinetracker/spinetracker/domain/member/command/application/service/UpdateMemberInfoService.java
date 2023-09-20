@@ -1,6 +1,6 @@
 package com.spinetracker.spinetracker.domain.member.command.application.service;
 
-import com.spinetracker.spinetracker.domain.member.command.application.dto.MemberInfoDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.FindMemberInfoDTO;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.MemberInfo;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.enumtype.GenderEnum;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.vo.AgeRangeVO;
@@ -22,7 +22,7 @@ public class UpdateMemberInfoService {
     }
 
     @Transactional
-    public MemberInfo updateMemberInfo(MemberInfoDTO memberInfoDTO, Long memberId) {
+    public MemberInfo updateMemberInfo(FindMemberInfoDTO memberInfoDTO, Long memberId) {
 
         Optional<MemberInfo> findMemberInfo = memberInfoRepository.findMemberInfoByMemberVO_MemberId(memberId);
         if(findMemberInfo.isPresent()) {

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.spinetracker.spinetracker.domain.member.query.domain.repository.MemberInfoMapper">
-    <resultMap id="MemberInfoMap" type="com.spinetracker.spinetracker.domain.member.command.application.dto.MemberInfoDTO">
+    <resultMap id="MemberInfoMap" type="com.spinetracker.spinetracker.domain.member.command.application.dto.FindMemberInfoDTO">
         <id property="id" column="id/"/>
         <result property="gender" column="gender"/>
         <result property="birthdate" column="birth_date"/>

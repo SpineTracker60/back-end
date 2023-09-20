@@ -29,6 +29,7 @@ public class FindMemberInfoController {
     }
 
     // 회원가입 시 추가 정보 입력 여부 확인 조회
+
     @Operation(
             summary = "추가 정보 입력 여부 확인",
             description = "로그인 시 추가 정보가 입력이 되어있는 회원인지 확인합니다."
