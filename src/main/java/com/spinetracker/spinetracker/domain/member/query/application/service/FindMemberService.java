@@ -1,6 +1,7 @@
 package com.spinetracker.spinetracker.domain.member.query.application.service;
 
 import com.spinetracker.spinetracker.domain.member.query.application.dto.FindMemberDTO;
+import com.spinetracker.spinetracker.domain.member.query.domain.repository.MemberInfoMapper;
 import com.spinetracker.spinetracker.domain.member.query.domain.repository.MemberMapper;
 import com.spinetracker.spinetracker.global.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,11 @@ import java.util.Map;
 public class FindMemberService {
 
     private final MemberMapper memberMapper;
+    private final MemberInfoMapper memberInfoMapper;
     @Autowired
-    public FindMemberService(MemberMapper memberMapper) {
+    public FindMemberService(MemberMapper memberMapper, MemberInfoMapper memberInfoMapper) {
         this.memberMapper = memberMapper;
+        this.memberInfoMapper = memberInfoMapper;
     }
 
     public FindMemberDTO findByUIDAndProvider(String uid, String provider) {
@@ -45,11 +48,16 @@ public class FindMemberService {
         return findMember;
     }
 
-    public FindMemberDTO  findByEmail(String email) {
+    public FindMemberDTO findByEmail(String email) {
 
         FindMemberDTO findMember = memberMapper.findByEmail(email);
         //ExceptionAssert.isUserExist(findMember);
 
         return findMember;
+    }
+
+    public Boolean isAddedInformation(Long id) {
+        System.out.println("memberInfoMapper.isAddedInformation(id) = " + memberInfoMapper.isAddedInformation(id));
+        return !memberInfoMapper.isAddedInformation(id);
     }
 }

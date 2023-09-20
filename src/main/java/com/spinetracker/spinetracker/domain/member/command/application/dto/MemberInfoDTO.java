@@ -8,13 +8,15 @@ import java.time.LocalDate;
 @Getter
 @ToString
 public class MemberInfoDTO {
+    private Long id;
     private String gender;
     private LocalDate birthdate;
     private String job;
 
     public MemberInfoDTO() {}
 
-    public MemberInfoDTO(String gender, LocalDate birthdate, String job) {
+    public MemberInfoDTO(Long id, String gender, LocalDate birthdate, String job) {
+        this.id = id;
         this.gender = gender;
         this.birthdate = birthdate;
         this.job = job;

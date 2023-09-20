@@ -14,6 +14,13 @@
         <result property="email" column="email"/>
     </resultMap>
 
+    <resultMap id="MemberInfoMap" type="com.spinetracker.spinetracker.domain.member.command.application.dto.MemberInfoDTO">
+        <id property="id" column="id/"/>
+        <result property="gender" column="gender"/>
+        <result property="birthdate" column="birth_date"/>
+        <result property="job" column="job"/>
+    </resultMap>
+
     <select id="findByUIDAndProvider" resultMap="MemberMap" parameterType="Map">
         SELECT *
         FROM
@@ -32,4 +39,5 @@
         WHERE
             id = #{id}
     </select>
+
 </mapper>
