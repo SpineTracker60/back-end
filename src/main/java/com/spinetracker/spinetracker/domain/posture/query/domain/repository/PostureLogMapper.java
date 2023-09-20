@@ -10,4 +10,6 @@ import java.util.Map;
 public interface PostureLogMapper {
 
     List<FindPostureLogDTO> findDailyPosture(Map<String, Object> param);
+
+    List<FindPostureLogDTO> findWeekly(Map<String, Object> params);
 }

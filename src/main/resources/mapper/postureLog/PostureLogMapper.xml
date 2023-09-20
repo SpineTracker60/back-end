@@ -18,6 +18,22 @@
         AND
             date = #{todayDate}
         ORDER BY
-            start_time ASC
+            start_time
+    </select>
+
+    <select id="findWeekly" resultMap="PostureLogMap" parameterType="Map">
+        SELECT *
+        FROM
+            POSTURE_LOG_TB
+        WHERE
+            member_id = #{memberId}
+          AND
+            date
+                BETWEEN
+                    #{startDate}
+                AND
+                    #{endDate}
+        ORDER BY
+            start_time
     </select>
 </mapper>
