@@ -93,7 +93,7 @@ public class SecurityConfiguration {
                                         "/swagger-ui/**", "/swagger","/webjars/**"
                                 )
                                 .antMatchers(
-                                        "/login/**"
+                                        "/login/**", "/posture/ratio"
                                 )
                 )
                 .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll());
