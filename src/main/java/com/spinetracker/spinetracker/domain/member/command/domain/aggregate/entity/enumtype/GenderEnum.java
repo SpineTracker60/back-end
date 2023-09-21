@@ -3,5 +3,6 @@ package com.spinetracker.spinetracker.domain.member.command.domain.aggregate.ent
 public enum GenderEnum {
 
     MALE,
-    FEMALE
+    FEMALE,
+    ETC
 }
