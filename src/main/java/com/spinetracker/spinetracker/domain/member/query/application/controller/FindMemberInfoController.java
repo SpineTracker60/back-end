@@ -48,4 +48,16 @@ public class FindMemberInfoController {
                         findMemberService.isAddedInformation(memberId))
                 );
     }
+
+    // 현재 로그인 되어 있는 유저 정보를 가져오는 API
+//    @GetMapping
+//    public ResponseEntity<ResponseDTO> getMember(@CurrentMember UserPrincipal userPrincipal) {
+//
+//        Long memberId = userPrincipal.getId();
+//
+//        return ResponseEntity.ok()
+//                .body(new ResponseDTO(HttpStatus.OK,
+//                        "조회 성공!!",
+//                        findMemberService.findById(memberId)));
+//    }
 }

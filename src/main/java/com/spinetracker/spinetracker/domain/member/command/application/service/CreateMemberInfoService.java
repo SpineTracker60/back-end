@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class CreateMemberInfoService {
@@ -25,11 +26,13 @@ public class CreateMemberInfoService {
     @Transactional
     public MemberInfo createMemberInfo(CreateMemberInfoDTO createMemberInfoDTO, Long memberId) {
 
+        // 성별, 생년월일, 직업 처음에 다 null임
         MemberVO memberVO = new MemberVO(memberId);
         GenderEnum inputGender = null;
         LocalDate inputBirthDate = null;
         String inputJob = null;
 
+        // null이 아니면 dto에 저장되어있는 성별, 생년월일, 직업을 가지고 옴
         if (createMemberInfoDTO.getGender() != null ) {
             inputGender = GenderEnum.valueOf(createMemberInfoDTO.getGender());
         } if(createMemberInfoDTO.getBirthdate() != null) {
@@ -38,7 +41,24 @@ public class CreateMemberInfoService {
             inputJob = createMemberInfoDTO.getJob();
         }
 
-        MemberInfo createdMemberInfo = new MemberInfo(inputGender, inputBirthDate, inputJob, memberVO);
-        return memberInfoRepository.save(createdMemberInfo);
+        // memberId를 통해 먼저 사용자 추가 정보를 찾음
+        Optional<MemberInfo> findMemberInfo = memberInfoRepository.findMemberInfoByMemberVO_MemberId(memberId);
+        // 사용자 추가정보가 비어있으면
+        if(findMemberInfo.isEmpty()) {
+            // 추가정보를 생성해줌
+            MemberInfo createdMemberInfo = new MemberInfo(inputGender, inputBirthDate, inputJob, memberVO);
+            // 저장
+            return memberInfoRepository.save(createdMemberInfo);
+            // 사용자 추가정보가 있으면
+        } else {
+            // 사용자 정보를 가져오고
+           MemberInfo memberInfo = findMemberInfo.get();
+           // 사용자 정보를 수정해줌
+           memberInfo.setBirthDate(inputBirthDate);
+           memberInfo.setJob(inputJob);
+           memberInfo.setGender(inputGender);
+           // 저장
+           return memberInfoRepository.save(memberInfo);
+        }
     }
 }
