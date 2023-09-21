@@ -134,13 +134,8 @@ class MemberInfoControllerTest {
         FindMemberDTO mockFindMemberDTO = new FindMemberDTO(
                 0L,
                 "mockName",
-                GenderEnum.FEMALE.name(),
-                AgeRangeEnum.FIFTY.name(),
-                "학생",
                 "profileImage",
-                PlatformEnum.KAKAO.name(),
-                RoleEnum.MEMBER.name(),
-                "email@test.com"
+                RoleEnum.MEMBER.name()
         );
         when(findMemberService.findById(memberId)).thenReturn(mockFindMemberDTO);
 

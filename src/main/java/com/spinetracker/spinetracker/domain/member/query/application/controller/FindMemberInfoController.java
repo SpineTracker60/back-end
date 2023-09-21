@@ -1,6 +1,7 @@
 package com.spinetracker.spinetracker.domain.member.query.application.controller;
 
 import com.spinetracker.spinetracker.domain.member.command.application.dto.CheckMemberInfoAddedDTO;
+import com.spinetracker.spinetracker.domain.member.query.application.dto.FindMemberDTO;
 import com.spinetracker.spinetracker.domain.member.query.application.service.FindMemberService;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "MemberInfo", description = "추가 정보 관련 API")
+@Tag(name = "MemberInfo", description = "유저 정보 관련 API")
 @RestController
 @RequestMapping("/member")
 public class FindMemberInfoController {
@@ -29,7 +30,6 @@ public class FindMemberInfoController {
     }
 
     // 회원가입 시 추가 정보 입력 여부 확인 조회
-
     @Operation(
             summary = "추가 정보 입력 여부 확인",
             description = "로그인 시 추가 정보가 입력이 되어있는 회원인지 확인합니다."
@@ -50,14 +50,26 @@ public class FindMemberInfoController {
     }
 
     // 현재 로그인 되어 있는 유저 정보를 가져오는 API
-//    @GetMapping
-//    public ResponseEntity<ResponseDTO> getMember(@CurrentMember UserPrincipal userPrincipal) {
-//
-//        Long memberId = userPrincipal.getId();
-//
-//        return ResponseEntity.ok()
-//                .body(new ResponseDTO(HttpStatus.OK,
-//                        "조회 성공!!",
-//                        findMemberService.findById(memberId)));
-//    }
+    @Operation(
+            summary = "유저 정보 조회",
+            description = "현재 로그인 되어 있는 회원의 정보를 확인합니다."
+    )
+    // response 정보
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = FindMemberDTO.class))}),
+    })
+    @GetMapping
+    public ResponseEntity<FindMemberDTO> getMember(@CurrentMember UserPrincipal userPrincipal) {
+
+        Long memberId = userPrincipal.getId();
+
+        FindMemberDTO findMember = findMemberService.findById(memberId);
+
+        return ResponseEntity.ok()
+                .body(new FindMemberDTO(
+                        findMember.getId(),
+                        findMember.getName(),
+                        findMember.getProfileImage(),
+                        findMember.getRole()));
+    }
 }

@@ -16,16 +16,10 @@ public class WithMockCustomUserSecurityContextFactory implements WithSecurityCon
         SecurityContext context = SecurityContextHolder.createEmptyContext();
 
         FindMemberDTO mockFindMemberDTO = new FindMemberDTO(
-                Long.parseLong(annotation.id()),
+                1L,
                 "mockName",
-                GenderEnum.FEMALE.name(),
-                AgeRangeEnum.FIFTY.name(),
-                "학생",
                 "profileImage",
-                annotation.provider(),
-                annotation.role(),
-                annotation.email()
-
+                annotation.role()
         );
 
         UserPrincipal principal = UserPrincipal.create(mockFindMemberDTO);
