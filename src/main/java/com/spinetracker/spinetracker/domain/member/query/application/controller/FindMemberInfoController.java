@@ -84,9 +84,7 @@ public class FindMemberInfoController {
     @GetMapping("/info/detail")
     public ResponseEntity<FindMemberInfoDTO> getMemberInfo(@RequestParam Long memberId) {
 
-        System.out.println("memberId = " + memberId);
         FindMemberInfoDTO findMemberInfo = findMemberService.findInfoById(memberId);
-        System.out.println("findMemberInfo = " + findMemberInfo);
 
         return ResponseEntity.ok()
                 .body(findMemberInfo);
