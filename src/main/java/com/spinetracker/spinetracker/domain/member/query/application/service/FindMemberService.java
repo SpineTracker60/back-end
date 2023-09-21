@@ -57,7 +57,6 @@ public class FindMemberService {
     }
 
     public Boolean isAddedInformation(Long id) {
-        System.out.println("memberInfoMapper.isAddedInformation(id) = " + memberInfoMapper.isAddedInformation(id));
         return !memberInfoMapper.isAddedInformation(id);
     }
 }

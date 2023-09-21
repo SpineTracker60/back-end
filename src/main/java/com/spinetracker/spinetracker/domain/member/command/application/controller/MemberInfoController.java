@@ -2,9 +2,11 @@ package com.spinetracker.spinetracker.domain.member.command.application.controll
 
 import com.spinetracker.spinetracker.domain.member.command.application.dto.CheckMemberInfoAddedDTO;
 import com.spinetracker.spinetracker.domain.member.command.application.dto.CreateMemberInfoDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.CreatedMemberInfoResponseDTO;
 import com.spinetracker.spinetracker.domain.member.command.application.dto.FindMemberInfoDTO;
 import com.spinetracker.spinetracker.domain.member.command.application.service.CreateMemberInfoService;
 import com.spinetracker.spinetracker.domain.member.command.application.service.UpdateMemberInfoService;
+import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.MemberInfo;
 import com.spinetracker.spinetracker.global.common.response.ResponseDTO;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
@@ -42,20 +44,26 @@ public class MemberInfoController {
     )
     // response 정보
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Created", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = CreateMemberInfoDTO.class))}),
+            @ApiResponse(responseCode = "201", description = "Created", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = CreatedMemberInfoResponseDTO.class))}),
     })
     @PostMapping
-    public ResponseEntity<ResponseDTO> createMemberInfo(@RequestBody CreateMemberInfoDTO memberInfoDTO, @CurrentMember UserPrincipal userPrincipal) {
+    public ResponseEntity<CreatedMemberInfoResponseDTO> createMemberInfo(@RequestBody CreateMemberInfoDTO createMemberInfoDTO, @CurrentMember UserPrincipal userPrincipal) {
 
         Long memberId = userPrincipal.getId();
 
-        if (memberInfoDTO.getGender() == null || memberInfoDTO.getBirthdate() == null || memberInfoDTO.getJob() == null) {
+        if (createMemberInfoDTO.getGender() == null || createMemberInfoDTO.getBirthdate() == null || createMemberInfoDTO.getJob() == null) {
             throw new RuntimeException("정보를 모두 입력해야 합니다.");
         }
 
+        MemberInfo createdMemberInfo = createMemberInfoService.createMemberInfo(createMemberInfoDTO,memberId);
+
         return ResponseEntity.created(URI.create("/member/info"))
-                .body(new ResponseDTO(HttpStatus.CREATED,
-                        "추가 성공!!", createMemberInfoService.createMemberInfo(memberInfoDTO,memberId))
+                .body(new CreatedMemberInfoResponseDTO(
+                        createdMemberInfo.getGender().name(),
+                        createdMemberInfo.getBirthDate(),
+                        createdMemberInfo.getJob(),
+                        createdMemberInfo.getMemberVO().getMemberId(),
+                        createdMemberInfo.getAgeRange().name())
                 );
     }
 
