@@ -5,13 +5,8 @@
     <resultMap id="MemberMap" type="com.spinetracker.spinetracker.domain.member.query.application.dto.FindMemberDTO">
         <id property="id" column="id" />
         <result property="name" column="name"/>
-        <result property="gender" column="gender"/>
-        <result property="ageRange" column="ageRange"/>
-        <result property="job" column="job"/>
-        <result property="profileImage" column="profileImage"/>
-        <result property="platform" column="platform"/>
+        <result property="profileImage" column="profile_image"/>
         <result property="role" column="role"/>
-        <result property="email" column="email"/>
     </resultMap>
 
     <resultMap id="MemberInfoMap" type="com.spinetracker.spinetracker.domain.member.command.application.dto.FindMemberInfoDTO">
@@ -33,7 +28,11 @@
     </select>
 
     <select id="findById" resultMap="MemberMap">
-        SELECT *
+        SELECT
+            id
+          , name
+          , profile_image
+          , role
         FROM
             MEMBER_TB
         WHERE

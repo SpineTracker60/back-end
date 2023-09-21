@@ -28,7 +28,7 @@ public class CreatedMemberInfoResponseDTO {
     private Long memberId;
 
     @Schema(type = "String", example = "UNDER_TEN", description = "사용자 나이대 입니다.",
-            allowableValues = {"RANGE_UNDER_TEN", "RANGE_TEN", "RANGE_TWENTY", "RANGE_THIRSTY", "RANGE_FORTY", "RANGE_FIFTY", "RANGE_SIXTY"})
+            allowableValues = {"UNDER_TEN", "TEN", "TWENTY", "THIRSTY", "FORTY", "FIFTY", "SIXTY"})
     @JsonProperty("age_range")
     private String ageRange;
 

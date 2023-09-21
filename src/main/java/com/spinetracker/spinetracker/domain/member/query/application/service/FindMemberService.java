@@ -41,11 +41,9 @@ public class FindMemberService {
 
     public FindMemberDTO findById(long memberId) throws UserNotFoundException {
 
-        FindMemberDTO findMember = memberMapper.findById(memberId);
-
         //ExceptionAssert.isUserExist(findMember);
 
-        return findMember;
+        return memberMapper.findById(memberId);
     }
 
     public FindMemberDTO findByEmail(String email) {

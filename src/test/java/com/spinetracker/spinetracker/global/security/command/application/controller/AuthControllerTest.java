@@ -73,13 +73,8 @@ class AuthControllerTest {
         FindMemberDTO mockFindMemberDTO = new FindMemberDTO(
                 userPrincipal.getId(),
                 "mockName",
-                GenderEnum.FEMALE.name(),
-                AgeRangeEnum.FIFTY.name(),
-                "학생",
                 "profileImage",
-                PlatformEnum.GOOGLE.name(),
-                RoleEnum.valueOf(userPrincipal.getRole().substring(5)).name(),
-                "email@test.com"
+                RoleEnum.valueOf(userPrincipal.getRole().substring(5)).name()
         );
         when(findMemberService.findById(userPrincipal.getId())).thenReturn(mockFindMemberDTO);
         System.out.println("testToken = " + testToken);
