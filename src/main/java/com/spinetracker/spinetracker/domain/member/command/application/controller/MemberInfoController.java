@@ -1,9 +1,6 @@
 package com.spinetracker.spinetracker.domain.member.command.application.controller;
 
-import com.spinetracker.spinetracker.domain.member.command.application.dto.CheckMemberInfoAddedDTO;
-import com.spinetracker.spinetracker.domain.member.command.application.dto.CreateMemberInfoDTO;
-import com.spinetracker.spinetracker.domain.member.command.application.dto.CreatedMemberInfoResponseDTO;
-import com.spinetracker.spinetracker.domain.member.command.application.dto.FindMemberInfoDTO;
+import com.spinetracker.spinetracker.domain.member.command.application.dto.*;
 import com.spinetracker.spinetracker.domain.member.command.application.service.CreateMemberInfoService;
 import com.spinetracker.spinetracker.domain.member.command.application.service.UpdateMemberInfoService;
 import com.spinetracker.spinetracker.domain.member.command.domain.aggregate.entity.MemberInfo;
@@ -68,19 +65,28 @@ public class MemberInfoController {
     }
 
     // 마이페이지에서 사용자 정보 수정
+    @Operation(
+            summary = "사용자 정보 수정",
+            description = "사용자 추가 정보를 수정 할 수 있습니다."
+    )
+    // response 정보
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = FindMemberInfoDTO.class))}),
+    })
     @PutMapping
-    public ResponseEntity<ResponseDTO> updateMemberInfo(@RequestBody FindMemberInfoDTO memberInfoDTO, @CurrentMember UserPrincipal userPrincipal) {
+    public ResponseEntity<ResponseDTO> updateMemberInfo(@RequestBody UpdateMemberInfoDTO updateMemberInfoDTO, @CurrentMember UserPrincipal userPrincipal) {
 
         Long memberId = userPrincipal.getId();
 
-        if (memberInfoDTO.getGender() == null || memberInfoDTO.getBirthdate() == null || memberInfoDTO.getJob() == null) {
+        if (updateMemberInfoDTO.getGender().isEmpty() || updateMemberInfoDTO.getBirthdate() == null || updateMemberInfoDTO.getJob().isEmpty()) {
             throw new RuntimeException("정보를 모두 입력해야 합니다.");
         }
 
+        MemberInfo updatedMemberInfo = updateMemberInfoService.updateMemberInfo(updateMemberInfoDTO, memberId);
         return ResponseEntity.ok()
                 .body(new ResponseDTO(HttpStatus.OK,
                         "변경 성공!!",
-                        updateMemberInfoService.updateMemberInfo(memberInfoDTO,memberId))
+                        updatedMemberInfo)
                 );
     }
 }
