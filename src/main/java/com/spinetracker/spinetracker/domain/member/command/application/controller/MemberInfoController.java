@@ -46,7 +46,6 @@ public class MemberInfoController {
     @PostMapping
     public ResponseEntity<CreatedMemberInfoResponseDTO> createMemberInfo(@RequestBody CreateMemberInfoDTO createMemberInfoDTO, @CurrentMember UserPrincipal userPrincipal) {
 
-        System.out.println("userPrincipal = " + userPrincipal);
         Long memberId = userPrincipal.getId();
 
         if (createMemberInfoDTO.getGender() == null || createMemberInfoDTO.getBirthdate() == null || createMemberInfoDTO.getJob() == null) {
