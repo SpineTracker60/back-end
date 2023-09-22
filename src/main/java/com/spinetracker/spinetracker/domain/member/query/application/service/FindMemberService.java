@@ -1,5 +1,6 @@
 package com.spinetracker.spinetracker.domain.member.query.application.service;
 
+import com.spinetracker.spinetracker.domain.member.command.application.dto.FindMemberInfoDTO;
 import com.spinetracker.spinetracker.domain.member.query.application.dto.FindMemberDTO;
 import com.spinetracker.spinetracker.domain.member.query.domain.repository.MemberInfoMapper;
 import com.spinetracker.spinetracker.domain.member.query.domain.repository.MemberMapper;
@@ -46,6 +47,7 @@ public class FindMemberService {
         return memberMapper.findById(memberId);
     }
 
+
     public FindMemberDTO findByEmail(String email) {
 
         FindMemberDTO findMember = memberMapper.findByEmail(email);
@@ -55,6 +57,12 @@ public class FindMemberService {
     }
 
     public Boolean isAddedInformation(Long id) {
+
         return !memberInfoMapper.isAddedInformation(id);
+    }
+
+    public FindMemberInfoDTO findInfoById(Long memberId) throws UserNotFoundException {
+
+        return memberInfoMapper.findInfoById(memberId);
     }
 }

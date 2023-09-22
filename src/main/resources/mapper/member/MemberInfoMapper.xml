@@ -3,7 +3,7 @@
 
 <mapper namespace="com.spinetracker.spinetracker.domain.member.query.domain.repository.MemberInfoMapper">
     <resultMap id="MemberInfoMap" type="com.spinetracker.spinetracker.domain.member.command.application.dto.FindMemberInfoDTO">
-        <id property="id" column="id/"/>
+        <id property="id" column="id"/>
         <result property="gender" column="gender"/>
         <result property="birthdate" column="birth_date"/>
         <result property="job" column="job"/>
@@ -18,5 +18,17 @@
                 MEMBERINFO_TB
           WHERE
                 member_id = #{id}
+    </select>
+
+    <select id="findInfoById" resultMap="MemberInfoMap">
+        SELECT
+              id
+            , gender
+            , birth_date
+            , job
+          FROM
+              MEMBERINFO_TB
+         WHERE
+             member_id = #{memberId}
     </select>
 </mapper>

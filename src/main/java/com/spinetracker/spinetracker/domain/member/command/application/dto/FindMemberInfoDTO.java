@@ -47,10 +47,6 @@ public class FindMemberInfoDTO {
         return this;
     }
 
-    public FindMemberInfoDTO setAgeRange(LocalDate birthdate) {
-        this.birthdate = birthdate;
-        return this;
-    }
 
     public FindMemberInfoDTO setJob(String job) {
         this.job = job;
