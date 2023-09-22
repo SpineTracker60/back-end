@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "Member", description = "유저 탈퇴 관련 API")
+@Tag(name = "Member", description = "유저 관련 API")
 @RestController
 @RequestMapping("/member")
 public class MemberController {
