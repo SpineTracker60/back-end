@@ -4,17 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
-import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
-public class FindMemberInfoDTO {
+public class UpdateMemberInfoDTO {
 
-    @Schema(type = "Long", example = "1", description = "사용자 정보 번호 입니다.")
-    private Long id;
 
     @Schema(type = "String", example = "FEMALE", description = "사용자 성별 입니다.", allowableValues = {"FEMALE", "MALE", "ETC"})
     @NotBlank
@@ -33,22 +30,33 @@ public class FindMemberInfoDTO {
     @NotNull
     private String job;
 
-    public FindMemberInfoDTO() {}
+    @Schema(type = "long", example = "1", description = "사용자 아이디 입니다.")
+    @JsonProperty("member_id")
+    private Long memberId;
 
-    public FindMemberInfoDTO(Long id, String gender, LocalDate birthdate, String job) {
-        this.id = id;
+    public UpdateMemberInfoDTO() {
+    }
+
+    public UpdateMemberInfoDTO(String gender, LocalDate birthdate, String job, Long memberId) {
         this.gender = gender;
         this.birthdate = birthdate;
         this.job = job;
+        this.memberId = memberId;
     }
 
-    public FindMemberInfoDTO setGender(String gender) {
+    public void setGender(String gender) {
         this.gender = gender;
-        return this;
     }
 
-    public FindMemberInfoDTO setJob(String job) {
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void setJob(String job) {
         this.job = job;
-        return this;
+    }
+
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
 }
