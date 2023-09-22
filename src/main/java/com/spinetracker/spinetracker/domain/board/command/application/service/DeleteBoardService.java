@@ -10,22 +10,20 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class UpdateBoardService {
-
+public class DeleteBoardService {
     private final BoardRepository boardRepository;
 
     @Autowired
-    public UpdateBoardService(BoardRepository boardRepository) {
+    public DeleteBoardService(BoardRepository boardRepository) {
         this.boardRepository = boardRepository;
     }
 
     @Transactional
-    public Board updatePost(Long boardId, Long memberId, BoardDTO boardDTO) {
+    public Board deletePost(Long boardId, Long memberId, BoardDTO boardDTO) {
         Optional<Board> findBoard = boardRepository.findBoardByIdAndWriter_Id(boardId, memberId);
         if(findBoard.isPresent()) {
             Board board = findBoard.get();
-            board.setTitle(boardDTO.getTitle());
-            board.setContent(boardDTO.getContent());
+            board.setBoardIsDeleted(true);
 
             return board;
         }
