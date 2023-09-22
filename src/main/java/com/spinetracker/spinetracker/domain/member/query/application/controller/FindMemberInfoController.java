@@ -81,7 +81,7 @@ public class FindMemberInfoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = FindMemberInfoDTO.class))}),
     })
-    @GetMapping("/info/detail")
+    @GetMapping("/info")
     public ResponseEntity<FindMemberInfoDTO> getMemberInfo(@RequestParam Long memberId) {
 
         FindMemberInfoDTO findMemberInfo = findMemberService.findInfoById(memberId);
