@@ -7,6 +7,7 @@ build/
 
 application.yml
 application-oauth.yml
+spinetracker-firebase-adminsdk.json
 
 ### STS ###
 .apt_generated
