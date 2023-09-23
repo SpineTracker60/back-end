@@ -1,6 +1,5 @@
 package com.spinetracker.spinetracker.domain.board.command.application.service;
 
-import com.spinetracker.spinetracker.domain.board.command.application.dto.BoardDTO;
 import com.spinetracker.spinetracker.domain.board.command.domain.aggregate.entity.Board;
 import com.spinetracker.spinetracker.domain.board.command.domain.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class DeleteBoardService {
     }
 
     @Transactional
-    public Board deletePost(Long boardId, Long memberId, BoardDTO boardDTO) {
+    public Board deletePost(Long boardId, Long memberId) {
         Optional<Board> findBoard = boardRepository.findBoardByIdAndWriter_Id(boardId, memberId);
         if(findBoard.isPresent()) {
             Board board = findBoard.get();

@@ -1,6 +1,6 @@
 package com.spinetracker.spinetracker.domain.board.command.application.service;
 
-import com.spinetracker.spinetracker.domain.board.command.application.dto.BoardDTO;
+import com.spinetracker.spinetracker.domain.board.command.application.dto.UpdatePostDTO;
 import com.spinetracker.spinetracker.domain.board.command.domain.aggregate.entity.Board;
 import com.spinetracker.spinetracker.domain.board.command.domain.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,11 @@ public class UpdateBoardService {
     }
 
     @Transactional
-    public Board updatePost(Long boardId, Long memberId, BoardDTO boardDTO) {
+    public Board updatePost(Long boardId, Long memberId, UpdatePostDTO updatePostDTO) {
         Optional<Board> findBoard = boardRepository.findBoardByIdAndWriter_Id(boardId, memberId);
         if(findBoard.isPresent()) {
             Board board = findBoard.get();
-            board.setTitle(boardDTO.getTitle());
-            board.setContent(boardDTO.getContent());
+            board.setContent(updatePostDTO.getContent());
 
             return board;
         }

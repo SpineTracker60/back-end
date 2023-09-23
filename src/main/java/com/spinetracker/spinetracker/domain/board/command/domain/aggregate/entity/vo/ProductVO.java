@@ -10,15 +10,11 @@ import javax.persistence.Embeddable;
 public class ProductVO {
 
     @Column(nullable = false, name = "product_id")
-    private String id;
-
-    @Column(nullable = false, name="product_url")
-    private String url;
+    private Long id;
 
     protected ProductVO() {}
 
-    public ProductVO(String id, String url) {
+    public ProductVO(Long id) {
         this.id = id;
-        this.url = url;
     }
 }

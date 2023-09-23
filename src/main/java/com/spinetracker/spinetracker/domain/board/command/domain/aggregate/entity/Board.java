@@ -17,9 +17,6 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 500, nullable = false)
-    private String title;
-
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
@@ -38,18 +35,12 @@ public class Board {
 
     protected Board() {}
 
-    public Board(String title, String content, WriterVO writer, ProductVO product) {
-        this.title = title;
+    public Board(String content, WriterVO writer, ProductVO product) {
         this.content = content;
         this.writer = writer;
         this.product = product;
         this.boardIsDeleted = false;        // 게시물 생성 시 default 가 false
         this.createdDate = LocalDateTime.now();
-    }
-
-    public Board setTitle(String title) {
-        this.title = title;
-        return this;
     }
 
     public Board setContent(String content) {

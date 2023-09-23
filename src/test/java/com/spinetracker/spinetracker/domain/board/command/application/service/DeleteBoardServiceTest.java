@@ -1,6 +1,6 @@
 package com.spinetracker.spinetracker.domain.board.command.application.service;
 
-import com.spinetracker.spinetracker.domain.board.command.application.dto.BoardDTO;
+import com.spinetracker.spinetracker.domain.board.command.application.dto.CreatePostDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,11 +24,13 @@ class DeleteBoardServiceTest {
                 Arguments.of(
                         1L,
                         2L,
-                        new BoardDTO(
-                                "게시물제목",
-                                "게시물내용",
-                                "상품번호",
-                                "상품URL"
+                        new CreatePostDTO(
+                                1L,
+                                "상품 이름",
+                                "글 내용",
+                                12121L,
+                                "ASKDAKDLDASD",
+                                "ASDASDASDSD"
                         )
                 )
         );
@@ -37,10 +39,10 @@ class DeleteBoardServiceTest {
     @DisplayName("BoardDTO 통해 게시물 삭제가 되는지 확인")
     @ParameterizedTest
     @MethodSource("getDeleteBoardInfo")
-    void deletePost(Long boardId, Long memberId, BoardDTO boardDTO) {
+    void deletePost(Long boardId, Long memberId) {
 
         Assertions.assertDoesNotThrow(
-                () -> deleteBoardService.deletePost(boardId, memberId, boardDTO)
+                () -> deleteBoardService.deletePost(boardId, memberId)
         );
     }
 }

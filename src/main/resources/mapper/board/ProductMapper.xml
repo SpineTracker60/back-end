@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spinetracker.spinetracker.domain.board.query.domain.repository.ProductMapper">
+    <resultMap id="ProductMap" type="com.spinetracker.spinetracker.domain.board.query.application.dto.FindProductDTO">
+        <id property="productId" column="product_id"/>
+        <result property="productUrl" column="product_url"/>
+        <result property="imageUrl" column="image_url"/>
+        <result property="productName" column="product_name"/>
+    </resultMap>
+
+    <select id="findByProductId" resultMap="ProductMap">
+        SELECT
+                product_id
+              , product_url
+              , image_url
+              , product_name
+          FROM
+                PRODUCT_TB
+          WHERE
+                product_id = #{productId}
+    </select>
+</mapper>
