@@ -15,7 +15,7 @@ public class FindPostDTO {
 
     public FindPostDTO() {}
 
-    public FindPostDTO(Long id, String writerId, String content, Long productId) {
+    public FindPostDTO(Long id, Long writerId, String content, Long productId) {
         this.id = id;
         this.writerId = getWriterId();
         this.content = content;

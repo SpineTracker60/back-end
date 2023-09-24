@@ -28,7 +28,7 @@ public class FindBoardService {
 
     public List<FindBoardDTO> findAllPost() {
 
-        List<FindPostDTO> findAllPostList =  boardMapper.findAllPost();
+        List<FindPostDTO> findAllPostList = boardMapper.findAllPost();
 
         List<FindBoardDTO> findBoardDTOList = new ArrayList<>();
 
