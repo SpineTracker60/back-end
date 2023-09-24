@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-@Tag(name = "Board", description = "게시판 관련 API")
+@Tag(name = "Board", description = "게시판 조회 관련 API")
 @RestController
 @RequestMapping("/board")
 public class FindBoardController {
