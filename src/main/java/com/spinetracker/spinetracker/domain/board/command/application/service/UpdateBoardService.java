@@ -20,12 +20,14 @@ public class UpdateBoardService {
     }
 
     @Transactional
-    public Board updatePost(Long boardId, Long memberId, UpdatePostDTO updatePostDTO) {
+    public Board updatePost(Long memberId, Long boardId, UpdatePostDTO updatePostDTO) {
+
         Optional<Board> findBoard = boardRepository.findBoardByIdAndWriter_Id(boardId, memberId);
         if(findBoard.isPresent()) {
             Board board = findBoard.get();
             board.setContent(updatePostDTO.getContent());
 
+            boardRepository.save(board);
             return board;
         }
         return null;

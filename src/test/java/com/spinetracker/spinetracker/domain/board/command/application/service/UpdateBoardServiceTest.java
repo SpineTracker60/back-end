@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 @SpringBootTest
@@ -25,7 +26,8 @@ class UpdateBoardServiceTest {
                         1L,
                         2L,
                         new UpdatePostDTO(
-                                "게시판내용"
+                                "게시판내용",
+                                LocalDateTime.now()
                         )
                 )
         );

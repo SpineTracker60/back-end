@@ -15,7 +15,7 @@ public class CreatedMemberInfoResponseDTO {
     @Schema(type = "String", example = "FEMALE", description = "사용자 성별 입니다.", allowableValues = {"FEMALE", "MALE", "ETC"})
     private String gender;
 
-    @Schema(type = "String", example = "2023-09-20", description = "사용자 생년월일 입니다.")
+    @Schema(type = "LocalDate", example = "2023-09-20", description = "사용자 생년월일 입니다.")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Seoul")
     @JsonProperty("birth_date")
     private LocalDate birthDate;
