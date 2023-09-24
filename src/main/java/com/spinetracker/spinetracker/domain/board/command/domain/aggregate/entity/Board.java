@@ -26,7 +26,7 @@ public class Board {
     @Embedded
     private ProductVO product;
 
-    @Column(name = "board_is_deleted")
+    @Column(name = "board_is_deleted", nullable = false)
     private boolean boardIsDeleted;
 
     @CreatedDate

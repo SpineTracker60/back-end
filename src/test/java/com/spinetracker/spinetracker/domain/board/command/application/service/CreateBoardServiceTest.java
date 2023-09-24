@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.stream.Stream;
 
 @SpringBootTest
-@Transactional
 class CreateBoardServiceTest {
 
     @Autowired
@@ -38,6 +37,7 @@ class CreateBoardServiceTest {
     @DisplayName("boardDTO를 통해 게시글이 생성 되는지 확인")
     @ParameterizedTest
     @MethodSource("getCreatePost")
+    @Transactional
     void createPost(Long memberId, CreatePostDTO boardDTO) {
 
         Assertions.assertDoesNotThrow(

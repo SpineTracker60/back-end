@@ -1,6 +1,5 @@
 package com.spinetracker.spinetracker.domain.board.query.application.service;
 
-import com.spinetracker.spinetracker.domain.board.query.application.dto.FindBoardDTO;
 import com.spinetracker.spinetracker.domain.board.query.application.dto.FindPostDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -18,16 +17,15 @@ class FindBoardServiceTest {
 
     @Autowired
     private FindBoardService findBoardService;
+
     private static Stream<Arguments> getBoardInfo() {
         return Stream.of(
                 Arguments.of(
-                        new FindBoardDTO(
+                        new FindPostDTO(
                                 1L,
-                                "게시물제목",
+                                1L,
                                 "게시물내용",
-                                "효정",
-                                "ADASDASD",
-                                "ASDASDSAD"
+                                    1L
                         )
                 )
         );
@@ -37,7 +35,12 @@ class FindBoardServiceTest {
     @ParameterizedTest
     @MethodSource("getBoardInfo")
     @Transactional
-    void boardInfo() {
+    void boardInfo(FindPostDTO findPostDTO) {
+
+//        List<FindPostDTO> findAllPostList = new ArrayList<>();
+//
+//        findAllPostList.add(findPostDTO);
+//        when(boardMapper.findAllPost()).thenReturn(findAllPostList);
 
         Assertions.assertDoesNotThrow(() -> findBoardService.findAllPost());
     }

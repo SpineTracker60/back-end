@@ -28,7 +28,7 @@ public class FindBoardService {
 
     public List<FindBoardDTO> findAllPost() {
 
-        List<FindPostDTO> findAllPostList =  boardMapper.findAllPost();
+        List<FindPostDTO> findAllPostList = boardMapper.findAllPost();
 
         List<FindBoardDTO> findBoardDTOList = new ArrayList<>();
 
@@ -37,8 +37,10 @@ public class FindBoardService {
             FindMemberDTO findMember = findMemberService.findById(findPost.getWriterId());
             findBoardDTOList.add(
               new FindBoardDTO(
+                      findPost.getId(),
                       findPost.getWriterId(),
                       findMember.getName(),
+                      findMember.getProfileImage(),
                       findPost.getContent(),
                       findProduct.getProductName(),
                       findProduct.getProductUrl(),

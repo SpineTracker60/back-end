@@ -48,7 +48,7 @@ public class MemberInfoController {
 
         Long memberId = userPrincipal.getId();
 
-        if (createMemberInfoDTO.getGender() == null || createMemberInfoDTO.getBirthdate() == null || createMemberInfoDTO.getJob() == null) {
+        if (createMemberInfoDTO.getGender().isEmpty() || createMemberInfoDTO.getBirthdate() == null || createMemberInfoDTO.getJob() == null) {
             throw new RuntimeException("정보를 모두 입력해야 합니다.");
         }
 
