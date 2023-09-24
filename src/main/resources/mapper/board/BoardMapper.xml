@@ -2,23 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.spinetracker.spinetracker.domain.board.query.domain.repository.BoardMapper">
-    <resultMap id="BoardMap" type="com.spinetracker.spinetracker.domain.board.command.application.dto.FindBoardDTO">
+    <resultMap id="BoardMap" type="com.spinetracker.spinetracker.domain.board.query.application.dto.FindPostDTO">
         <id property="id" column="id"/>
-        <result property="title" column="title"/>
+        <result property="writerId" column="writer"/>
         <result property="content" column="content"/>
         <result property="productId" column="product_id"/>
-        <result property="productUrl" column="product_url"/>
     </resultMap>
 
-    <select id="findAllPost" resultMap="BoardMap" parameterType="Map">
+    <select id="findAllPost" resultMap="BoardMap">
         SELECT
-                title
+                id
+              , writer
               , content
               , product_id
-              , product_url
           FROM
                 BOARD_TB
           WHERE
                 board_is_deleted = false
+          ORDER BY created_date
     </select>
 </mapper>
