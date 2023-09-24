@@ -22,11 +22,7 @@ class FindBoardServiceTest {
 
     @Autowired
     private FindBoardService findBoardService;
-    @Autowired
-    private CreateBoardService createBoardService;
 
-    @MockBean
-    private BoardMapper boardMapper;
     private static Stream<Arguments> getBoardInfo() {
         return Stream.of(
                 Arguments.of(
