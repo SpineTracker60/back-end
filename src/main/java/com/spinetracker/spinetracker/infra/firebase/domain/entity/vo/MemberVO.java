@@ -1,4 +1,4 @@
-package com.spinetracker.spinetracker.infra.firebase.entity.vo;
+package com.spinetracker.spinetracker.infra.firebase.domain.entity.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class MemberVO {
 
-    @Column(nullable = false, name = "member_id")
+    @Column(nullable = false, name = "member_id", unique = true)
     private Long id;
 
     protected MemberVO() {}

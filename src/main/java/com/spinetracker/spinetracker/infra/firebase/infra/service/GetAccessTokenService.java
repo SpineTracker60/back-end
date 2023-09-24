@@ -1,4 +1,4 @@
-package com.spinetracker.spinetracker.infra.firebase.service;
+package com.spinetracker.spinetracker.infra.firebase.infra.service;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.spinetracker.spinetracker.global.common.annotation.InfraService;

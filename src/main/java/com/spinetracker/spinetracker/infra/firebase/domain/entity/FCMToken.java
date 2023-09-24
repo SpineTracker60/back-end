@@ -1,6 +1,6 @@
-package com.spinetracker.spinetracker.infra.firebase.entity;
+package com.spinetracker.spinetracker.infra.firebase.domain.entity;
 
-import com.spinetracker.spinetracker.infra.firebase.entity.vo.MemberVO;
+import com.spinetracker.spinetracker.infra.firebase.domain.entity.vo.MemberVO;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -25,6 +25,10 @@ public class FCMToken {
 
     public FCMToken(MemberVO member, String token) {
         this.member = member;
+        this.token = token;
+    }
+
+    public void setToken(String token) {
         this.token = token;
     }
 
