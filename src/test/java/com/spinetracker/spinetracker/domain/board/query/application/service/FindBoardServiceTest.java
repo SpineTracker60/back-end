@@ -24,6 +24,7 @@ class FindBoardServiceTest {
                                 1L,
                                 1L,
                                 "게시물제목",
+                                "profileImage",
                                 "게시물내용",
                                 "효정",
                                 "ADASDASD",

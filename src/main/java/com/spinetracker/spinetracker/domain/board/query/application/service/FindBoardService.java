@@ -40,6 +40,7 @@ public class FindBoardService {
                       findPost.getId(),
                       findPost.getWriterId(),
                       findMember.getName(),
+                      findMember.getProfileImage(),
                       findPost.getContent(),
                       findProduct.getProductName(),
                       findProduct.getProductUrl(),

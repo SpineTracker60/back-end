@@ -21,6 +21,10 @@ public class FindBoardDTO {
     @JsonProperty("writer_name")
     private final String writerName;
 
+    @Schema(type = "String", example = "프로필 URL", description = "작성자 프로필 이미지 입니다.")
+    @JsonProperty("profile_image")
+    private final String profileImage;
+
     @Schema(type = "String", example = "게시글 내용", description = "게시글 본문 내용 입니다.")
     private final String content;
 
@@ -36,10 +40,11 @@ public class FindBoardDTO {
     @JsonProperty("image_url")
     private final String imageUrl;
 
-    public FindBoardDTO(Long boardId, Long writerId, String writerName, String content, String productName, String productUrl, String imageUrl) {
+    public FindBoardDTO(Long boardId, Long writerId, String writerName, String profileImage, String content, String productName, String productUrl, String imageUrl) {
         this.boardId = boardId;
         this.writerId = writerId;
         this.writerName = writerName;
+        this.profileImage = profileImage;
         this.content = content;
         this.productName = productName;
         this.productUrl = productUrl;
