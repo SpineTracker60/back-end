@@ -1,4 +1,4 @@
-package com.spinetracker.spinetracker.infra.firebase.infra.service;
+package com.spinetracker.spinetracker.infra.firebase.command.infra.service;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;

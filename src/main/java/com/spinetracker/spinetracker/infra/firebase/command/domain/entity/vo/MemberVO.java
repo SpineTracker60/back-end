@@ -1,4 +1,4 @@
-package com.spinetracker.spinetracker.infra.firebase.domain.entity.vo;
+package com.spinetracker.spinetracker.infra.firebase.command.domain.entity.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

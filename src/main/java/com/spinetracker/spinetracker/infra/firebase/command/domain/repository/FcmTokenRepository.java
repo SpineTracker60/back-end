@@ -1,7 +1,7 @@
-package com.spinetracker.spinetracker.infra.firebase.domain.repository;
+package com.spinetracker.spinetracker.infra.firebase.command.domain.repository;
 
 
-import com.spinetracker.spinetracker.infra.firebase.domain.entity.FCMToken;
+import com.spinetracker.spinetracker.infra.firebase.command.domain.entity.FCMToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

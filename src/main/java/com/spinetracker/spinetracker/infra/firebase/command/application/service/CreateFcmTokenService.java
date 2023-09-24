@@ -1,8 +1,8 @@
-package com.spinetracker.spinetracker.infra.firebase.application.service;
+package com.spinetracker.spinetracker.infra.firebase.command.application.service;
 
-import com.spinetracker.spinetracker.infra.firebase.domain.entity.FCMToken;
-import com.spinetracker.spinetracker.infra.firebase.domain.entity.vo.MemberVO;
-import com.spinetracker.spinetracker.infra.firebase.domain.repository.FcmTokenRepository;
+import com.spinetracker.spinetracker.infra.firebase.command.domain.entity.FCMToken;
+import com.spinetracker.spinetracker.infra.firebase.command.domain.entity.vo.MemberVO;
+import com.spinetracker.spinetracker.infra.firebase.command.domain.repository.FcmTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
