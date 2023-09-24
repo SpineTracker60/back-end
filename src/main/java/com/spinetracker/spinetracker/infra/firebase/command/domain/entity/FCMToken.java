@@ -1,6 +1,6 @@
-package com.spinetracker.spinetracker.infra.firebase.domain.entity;
+package com.spinetracker.spinetracker.infra.firebase.command.domain.entity;
 
-import com.spinetracker.spinetracker.infra.firebase.domain.entity.vo.MemberVO;
+import com.spinetracker.spinetracker.infra.firebase.command.domain.entity.vo.MemberVO;
 import lombok.Getter;
 
 import javax.persistence.*;
