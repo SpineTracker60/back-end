@@ -6,5 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ProductMapper {
 
-    FindProductDTO findByProductId(Long id);
+    FindProductDTO findById(Long id);
 }
