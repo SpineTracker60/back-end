@@ -93,7 +93,7 @@ public class SecurityConfiguration {
                                         "/swagger-ui/**", "/swagger","/webjars/**"
                                 )
                                 .antMatchers(
-                                        "/login/**", "/posture/ratio", "/member/info"
+                                        "/login/**", "/posture/ratio", "/member/info/query"
                                 )
                 )
                 .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll());
@@ -120,7 +120,7 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                     .antMatchers("/oauth2/**", "/auth/**")
                         .hasRole(RoleEnum.MEMBER.name())
-                .antMatchers("/blog/**", "/member/**")
+                .antMatchers("/blog/**", "/member/**", "/board/**")
                     .permitAll()
                 .antMatchers("/admin/**")
                     .hasRole(RoleEnum.ADMIN.name())

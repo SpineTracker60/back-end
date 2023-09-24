@@ -37,6 +37,7 @@ public class FindBoardService {
             FindMemberDTO findMember = findMemberService.findById(findPost.getWriterId());
             findBoardDTOList.add(
               new FindBoardDTO(
+                      findPost.getId(),
                       findPost.getWriterId(),
                       findMember.getName(),
                       findPost.getContent(),

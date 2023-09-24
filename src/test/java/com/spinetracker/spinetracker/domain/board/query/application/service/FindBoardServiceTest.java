@@ -1,7 +1,6 @@
 package com.spinetracker.spinetracker.domain.board.query.application.service;
 
 import com.spinetracker.spinetracker.domain.board.query.application.dto.FindBoardDTO;
-import com.spinetracker.spinetracker.domain.board.query.application.dto.FindPostDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,6 +21,7 @@ class FindBoardServiceTest {
         return Stream.of(
                 Arguments.of(
                         new FindBoardDTO(
+                                1L,
                                 1L,
                                 "게시물제목",
                                 "게시물내용",
