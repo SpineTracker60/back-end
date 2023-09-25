@@ -47,6 +47,7 @@ jobs:
         with:
           name: "spinetracker-firebase-adminsdk.json"
           json: ${{ secrets.FIREBASE_ADMIN_SDK }}
+          dir: './src/main/resources/'
 
       - name: make application.yml
         run:
