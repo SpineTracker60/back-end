@@ -1,6 +1,7 @@
 package com.spinetracker.spinetracker.domain.board.command.application.service;
 
 import com.spinetracker.spinetracker.domain.board.command.application.dto.CreatePostDTO;
+import com.spinetracker.spinetracker.domain.board.command.application.dto.CreateProductDTO;
 import com.spinetracker.spinetracker.domain.board.command.domain.aggregate.entity.Board;
 import com.spinetracker.spinetracker.domain.board.command.domain.aggregate.entity.Product;
 import com.spinetracker.spinetracker.domain.board.command.domain.aggregate.entity.vo.ProductVO;
@@ -28,16 +29,15 @@ public class CreateBoardService {
     @Transactional
     public Board createPost(Long memberId,CreatePostDTO createPostDTO) {
         WriterVO writerVO = new WriterVO(memberId);
-        Optional<Product> product = productRepository.findById(createPostDTO.getProductId());
-        if(product.isEmpty()) {
-            Product createProduct = new Product(
-                    createPostDTO.getProductId(),
-                    createPostDTO.getProductUrl(),
-                    createPostDTO.getImageUrl(),
-                    createPostDTO.getProductName()
-            );
-            productRepository.save(createProduct);
-        }
+
+        CreateProductDTO createProductDTO = new CreateProductDTO(
+                createPostDTO.getProductId(),
+                createPostDTO.getProductUrl(),
+                createPostDTO.getImageUrl(),
+                createPostDTO.getProductName()
+        );
+        createProduct(createProductDTO);
+
         ProductVO productVO = new ProductVO(createPostDTO.getProductId());
         Board createdPost = new Board(
                 createPostDTO.getContent(),
@@ -46,4 +46,19 @@ public class CreateBoardService {
         );
         return boardRepository.save(createdPost);
     }
+
+    @Transactional
+    public Product createProduct(CreateProductDTO createProductDTO) {
+        Optional<Product> product = productRepository.findById(createProductDTO.getProductId());
+            if(product.isEmpty()) {
+                Product createProduct = new Product(
+                        createProductDTO.getProductId(),
+                        createProductDTO.getProductUrl(),
+                        createProductDTO.getImageUrl(),
+                        createProductDTO.getProductName()
+                );
+                productRepository.save(createProduct);
+            }
+            return null;
+        }
 }

@@ -1,6 +1,7 @@
 package com.spinetracker.spinetracker.domain.board.command.application.service;
 
 import com.spinetracker.spinetracker.domain.board.command.application.dto.CreatePostDTO;
+import com.spinetracker.spinetracker.domain.board.command.application.dto.CreateProductDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,6 +35,20 @@ class CreateBoardServiceTest {
 
     }
 
+    private static Stream<Arguments> getCreateProduct() {
+        return Stream.of(
+                Arguments.of(
+                        new CreateProductDTO(
+                                1L,
+                                "상품 url",
+                                "이미지 url",
+                                "상품 이름"
+                        )
+                )
+        );
+
+    }
+
     @DisplayName("boardDTO를 통해 게시글이 생성 되는지 확인")
     @ParameterizedTest
     @MethodSource("getCreatePost")
@@ -42,6 +57,17 @@ class CreateBoardServiceTest {
 
         Assertions.assertDoesNotThrow(
                 () -> createBoardService.createPost(memberId, boardDTO)
+        );
+    }
+
+    @DisplayName("CreateProductDTO를 통해 상품이 생성 되는지 확인")
+    @ParameterizedTest
+    @MethodSource("getCreateProduct")
+    @Transactional
+    void createProduct(CreateProductDTO createProductDTO) {
+
+        Assertions.assertDoesNotThrow(
+                () -> createBoardService.createProduct(createProductDTO)
         );
     }
 }
