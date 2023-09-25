@@ -43,6 +43,12 @@ public class FindFcmTokenController {
 
         FindFcmTokenDTO findFcmTokenDTO = findFcmTokenService.findByMemberId(memberId);
 
-        return ResponseEntity.ok().body(new ResponseFcmToken(memberId, findFcmTokenDTO.getFcmToken()));
+        ResponseFcmToken responseFcmToken = new ResponseFcmToken();
+        if(findFcmTokenDTO != null) {
+            responseFcmToken.setMemberId(findFcmTokenDTO.getMemberId());
+            responseFcmToken.setFcmToken(findFcmTokenDTO.getFcmToken());
+        }
+
+        return ResponseEntity.ok().body(responseFcmToken);
     }
 }
