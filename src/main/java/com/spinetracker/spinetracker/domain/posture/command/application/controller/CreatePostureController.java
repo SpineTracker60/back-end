@@ -4,14 +4,12 @@ import com.spinetracker.spinetracker.domain.posture.command.application.dto.Crea
 import com.spinetracker.spinetracker.domain.posture.command.application.dto.PostureBody;
 import com.spinetracker.spinetracker.domain.posture.command.application.dto.ResponsePosture;
 import com.spinetracker.spinetracker.domain.posture.command.application.service.CreatePostureLogService;
+import com.spinetracker.spinetracker.domain.posture.command.application.service.PostPostureLogMessageService;
 import com.spinetracker.spinetracker.domain.posture.command.domain.aggregate.entity.PostureLog;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,10 +29,12 @@ import java.util.List;
 public class CreatePostureController {
 
     private final CreatePostureLogService createPostureLogService;
+    private final PostPostureLogMessageService postPostureLogMessageService;
 
     @Autowired
-    public CreatePostureController(CreatePostureLogService createPostureLogService) {
+    public CreatePostureController(CreatePostureLogService createPostureLogService, PostPostureLogMessageService postPostureLogMessageService) {
         this.createPostureLogService = createPostureLogService;
+        this.postPostureLogMessageService = postPostureLogMessageService;
     }
 
     // 메서드 정보
@@ -59,6 +59,7 @@ public class CreatePostureController {
             createdPostureLogList.add(createPostureLogService.create(memberId, createPostureLogDTO));
         }
 
+
         List<PostureBody> postureBodyList = getPostureBodies(createdPostureLogList);
         ResponsePosture responsePosture = new ResponsePosture(
                 ! postureBodyList.isEmpty(),
@@ -80,6 +81,10 @@ public class CreatePostureController {
                     postureLog.getDateTime().getEndTime()
             );
             postureBodyList.add(postureBody);
+
+            if(postureBody.getPostureTag().equals("END")) {
+                postPostureLogMessageService.postDailyPostureLogMessage(postureBody.getMemberId());
+            }
         }
         return postureBodyList;
     }

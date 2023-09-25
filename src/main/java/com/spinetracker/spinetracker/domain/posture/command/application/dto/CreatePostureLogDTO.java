@@ -45,4 +45,14 @@ public class CreatePostureLogDTO {
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
+    @Override
+    public String toString() {
+        return "CreatePostureLogDTO{" +
+                "postureTag='" + postureTag + '\'' +
+                ", date=" + date +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                '}';
+    }
 }

@@ -18,7 +18,7 @@ public class PostMessageService {
         this.firebaseMessaging = firebaseMessaging;
     }
 
-    public boolean sendToToken(String title, String body, String receiverToken) throws FirebaseMessagingException {
+    public boolean sendToToken(String title, String body, String receiverToken) {
         // [START send_to_token]
         // This registration token comes from the client FCM SDKs.
         String registrationToken = "YOUR_REGISTRATION_TOKEN";
