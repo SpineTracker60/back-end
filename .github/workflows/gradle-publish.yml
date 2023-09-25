@@ -41,13 +41,12 @@ jobs:
           mysql user: ${{ secrets.MYSQL_USERNAME }}
           mysql password: ${{ secrets.MYSQL_PASSWORD }}
 
-      - name: make firebase-adminsdk-json
-        run:
-          touch ./src/main/resources/spinetracker-firebase-adminsdk.json
-        shell: bash
-      - name: deliver spinetracker-firebase-adminsdk.json
-        run: echo "${{ secrets.FIREBASE_ADMIN_SDK }}" | base64 -d > ./src/main/resources/spinetracker-firebase-adminsdk.json
-        shell: bash
+      - name: create-json
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "spinetracker-firebase-adminsdk.json"
+          json: ${{ secrets.FIREBASE_ADMIN_SDK }}
 
       - name: make application.yml
         run:
