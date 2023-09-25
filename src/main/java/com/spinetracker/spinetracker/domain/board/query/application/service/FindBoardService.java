@@ -8,6 +8,7 @@ import com.spinetracker.spinetracker.domain.member.query.application.dto.FindMem
 import com.spinetracker.spinetracker.domain.member.query.application.service.FindMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class FindBoardService {
         this.findMemberService = findMemberService;
     }
 
+    @Transactional
     public List<FindBoardDTO> findAllPost() {
 
         List<FindPostDTO> findAllPostList = boardMapper.findAllPost();
@@ -33,7 +35,7 @@ public class FindBoardService {
         List<FindBoardDTO> findBoardDTOList = new ArrayList<>();
 
         for (FindPostDTO findPost : findAllPostList) {
-            FindProductDTO findProduct = findProductService.findByProductId(findPost.getProductId());
+            FindProductDTO findProduct = findProductService.findById(findPost.getProductId());
             FindMemberDTO findMember = findMemberService.findById(findPost.getWriterId());
             findBoardDTOList.add(
               new FindBoardDTO(

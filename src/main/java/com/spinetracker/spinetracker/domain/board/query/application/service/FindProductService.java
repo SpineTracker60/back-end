@@ -15,8 +15,8 @@ public class FindProductService {
         this.productMapper = productMapper;
     }
 
-    public FindProductDTO findByProductId(Long id) {
+    public FindProductDTO findById(Long id) {
 
-        return productMapper.findByProductId(id);
+        return productMapper.findById(id);
     }
 }

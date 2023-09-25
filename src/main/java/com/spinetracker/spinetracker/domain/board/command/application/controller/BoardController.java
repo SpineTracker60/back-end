@@ -4,6 +4,7 @@ import com.spinetracker.spinetracker.domain.board.command.application.dto.Create
 import com.spinetracker.spinetracker.domain.board.command.application.dto.CreatedBoardResponseDTO;
 import com.spinetracker.spinetracker.domain.board.command.application.dto.UpdatePostDTO;
 import com.spinetracker.spinetracker.domain.board.command.application.service.CreateBoardService;
+import com.spinetracker.spinetracker.domain.board.command.application.service.DeleteBoardService;
 import com.spinetracker.spinetracker.domain.board.command.application.service.UpdateBoardService;
 import com.spinetracker.spinetracker.domain.board.command.domain.aggregate.entity.Board;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
@@ -27,11 +28,13 @@ public class BoardController {
 
     private final CreateBoardService createBoardService;
     private final UpdateBoardService updateBoardService;
+    private final DeleteBoardService deleteBoardService;
 
     @Autowired
-    public BoardController(CreateBoardService createBoardService, UpdateBoardService updateBoardService) {
+    public BoardController(CreateBoardService createBoardService, UpdateBoardService updateBoardService, DeleteBoardService deleteBoardService) {
         this.createBoardService = createBoardService;
         this.updateBoardService = updateBoardService;
+        this.deleteBoardService = deleteBoardService;
     }
 
     @Operation(
@@ -40,7 +43,7 @@ public class BoardController {
     )
     // response 정보
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Created", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = CreatePostDTO.class))}),
+            @ApiResponse(responseCode = "201", description = "Created", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = CreatePostDTO.class))}),
     })
     @PostMapping
     public ResponseEntity<CreatedBoardResponseDTO> createPost(@CurrentMember UserPrincipal userPrincipal, @RequestBody CreatePostDTO createPostDTO) {
@@ -61,7 +64,7 @@ public class BoardController {
     )
     // response 정보
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = UpdatePostDTO.class))}),
+            @ApiResponse(responseCode = "200", description = "OK", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = UpdatePostDTO.class))}),
     })
     @PutMapping("/{boardId}")
     public ResponseEntity<UpdatePostDTO> updatePost(@CurrentMember UserPrincipal userPrincipal, @PathVariable Long boardId, @RequestBody UpdatePostDTO updatePostDTO) {
@@ -73,5 +76,24 @@ public class BoardController {
         return ResponseEntity.ok().body(new UpdatePostDTO(
                 updatedBoard.getContent(),
                 updatedBoard.getCreatedDate()));
+    }
+
+    @Operation(
+            summary = "게시판 글 삭제",
+            description = "게시판의 글을 삭제 합니다."
+    )
+    // response 정보
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "noContent"),
+    })
+
+    @DeleteMapping("/{boardId}")
+    public ResponseEntity<?> deletePost(@CurrentMember UserPrincipal userPrincipal, @PathVariable Long boardId) {
+
+        Long memberId = userPrincipal.getId();
+
+        deleteBoardService.deletePost(boardId, memberId);
+
+        return ResponseEntity.noContent().build();
     }
 }

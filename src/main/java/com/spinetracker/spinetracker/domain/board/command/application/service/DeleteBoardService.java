@@ -24,6 +24,7 @@ public class DeleteBoardService {
             Board board = findBoard.get();
             board.setBoardIsDeleted(true);
 
+            boardRepository.delete(board);
             return board;
         }
         return null;
