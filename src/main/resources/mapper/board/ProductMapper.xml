@@ -9,7 +9,7 @@
         <result property="productName" column="product_name"/>
     </resultMap>
 
-    <select id="findByProductId" resultMap="ProductMap">
+    <select id="findById" resultMap="ProductMap">
         SELECT
                 product_id
               , product_url
@@ -18,6 +18,6 @@
           FROM
                 PRODUCT_TB
           WHERE
-                product_id = #{productId}
+                product_id = #{id}
     </select>
 </mapper>
