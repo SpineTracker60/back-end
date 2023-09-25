@@ -13,6 +13,8 @@ import com.spinetracker.spinetracker.global.filter.TokenAuthenticationFilter;
 import com.spinetracker.spinetracker.global.security.command.application.service.CustomUserDetailService;
 import com.spinetracker.spinetracker.global.security.command.domain.service.CustomTokenService;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
+import com.spinetracker.spinetracker.infra.firebase.query.application.dto.FindFcmTokenDTO;
+import com.spinetracker.spinetracker.infra.firebase.query.application.service.FindFcmTokenService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -58,6 +60,9 @@ class CreatePostureControllerTest {
 
     @MockBean
     private FindMemberService findMemberService;
+
+    @MockBean
+    private FindFcmTokenService findFcmTokenService;
 
     @Autowired
     private CustomTokenService customTokenService;
@@ -120,6 +125,13 @@ class CreatePostureControllerTest {
                 RoleEnum.valueOf(userPrincipal.getRole().substring(5)).name()
         );
         when(findMemberService.findById(userPrincipal.getId())).thenReturn(mockFindMemberDTO);
+
+        FindFcmTokenDTO mockFindFcmTokenDTO = new FindFcmTokenDTO(
+                0L,
+                userPrincipal.getId(),
+                "mockFcmToken"
+        );
+        when(findFcmTokenService.findByMemberId(userPrincipal.getId())).thenReturn(mockFindFcmTokenDTO);
 
         String content = objectMapper.writeValueAsString(createPostureLogDTO);
 

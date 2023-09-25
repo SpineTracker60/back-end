@@ -9,6 +9,7 @@ import com.spinetracker.spinetracker.domain.posture.command.domain.aggregate.vo.
 import com.spinetracker.spinetracker.domain.posture.command.domain.repository.PostureLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class CreatePostureLogService {
         this.postureLogRepository = postureLogRepository;
     }
 
+    @Transactional
     public PostureLog create(Long memberId, CreatePostureLogDTO createPostureLogDTO) {
 
         MemberVO member = new MemberVO(memberId);
