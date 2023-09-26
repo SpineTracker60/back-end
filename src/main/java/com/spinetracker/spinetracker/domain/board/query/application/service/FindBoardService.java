@@ -52,4 +52,10 @@ public class FindBoardService {
 
         return findBoardDTOList;
     }
+
+    @Transactional
+    public FindPostDTO findBoardNo(Long boardId) {
+
+        return boardMapper.findBoardId(boardId);
+    }
 }
