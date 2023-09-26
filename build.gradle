@@ -45,7 +45,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64'
     implementation 'com.google.firebase:firebase-admin:7.1.1'
-    implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.6.1'
 
 
 

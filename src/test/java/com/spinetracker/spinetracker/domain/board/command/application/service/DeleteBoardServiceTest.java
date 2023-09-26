@@ -27,7 +27,7 @@ class DeleteBoardServiceTest {
                         new CreatePostDTO(
                                 1L,
                                 "글 내용",
-                                "ASDASDASDSD"
+                                1L
                         )
                 )
         );
