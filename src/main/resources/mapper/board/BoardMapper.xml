@@ -21,4 +21,16 @@
                 board_is_deleted = false
           ORDER BY created_date
     </select>
+
+    <select id="findBoardId" resultMap="BoardMap">
+        SELECT
+                id
+              , writer
+              , content
+              , product_id
+          FROM
+                BOARD_TB
+         WHERE
+                id = #{id}
+    </select>
 </mapper>

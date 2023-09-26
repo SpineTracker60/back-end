@@ -8,4 +8,6 @@ import java.util.List;
 public interface BoardMapper {
 
     List<FindPostDTO> findAllPost();
+
+    FindPostDTO findBoardId(Long id);
 }

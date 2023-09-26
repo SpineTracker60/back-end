@@ -1,12 +1,16 @@
 package com.spinetracker.spinetracker.domain.board.command.application.controller;
 
 import com.spinetracker.spinetracker.domain.board.command.application.dto.CreatePostDTO;
-import com.spinetracker.spinetracker.domain.board.command.application.dto.CreatedBoardResponseDTO;
 import com.spinetracker.spinetracker.domain.board.command.application.dto.UpdatePostDTO;
 import com.spinetracker.spinetracker.domain.board.command.application.service.CreateBoardService;
 import com.spinetracker.spinetracker.domain.board.command.application.service.DeleteBoardService;
 import com.spinetracker.spinetracker.domain.board.command.application.service.UpdateBoardService;
 import com.spinetracker.spinetracker.domain.board.command.domain.aggregate.entity.Board;
+import com.spinetracker.spinetracker.domain.board.query.application.dto.FindBoardDTO;
+import com.spinetracker.spinetracker.domain.board.query.application.dto.FindProductDTO;
+import com.spinetracker.spinetracker.domain.board.query.application.service.FindProductService;
+import com.spinetracker.spinetracker.domain.member.query.application.dto.FindMemberDTO;
+import com.spinetracker.spinetracker.domain.member.query.application.service.FindMemberService;
 import com.spinetracker.spinetracker.global.common.annotation.CurrentMember;
 import com.spinetracker.spinetracker.global.security.token.UserPrincipal;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,11 +34,16 @@ public class BoardController {
     private final UpdateBoardService updateBoardService;
     private final DeleteBoardService deleteBoardService;
 
+    private final FindProductService findProductService;
+    private final FindMemberService findMemberService;
+
     @Autowired
-    public BoardController(CreateBoardService createBoardService, UpdateBoardService updateBoardService, DeleteBoardService deleteBoardService) {
+    public BoardController(CreateBoardService createBoardService, UpdateBoardService updateBoardService, DeleteBoardService deleteBoardService, FindProductService findProductService, FindMemberService findMemberService) {
         this.createBoardService = createBoardService;
         this.updateBoardService = updateBoardService;
         this.deleteBoardService = deleteBoardService;
+        this.findProductService = findProductService;
+        this.findMemberService = findMemberService;
     }
 
     @Operation(
@@ -43,19 +52,29 @@ public class BoardController {
     )
     // response 정보
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Created", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = CreatePostDTO.class))}),
+            @ApiResponse(responseCode = "201", description = "Created", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = FindBoardDTO.class))}),
     })
     @PostMapping
-    public ResponseEntity<CreatedBoardResponseDTO> createPost(@CurrentMember UserPrincipal userPrincipal, @RequestBody CreatePostDTO createPostDTO) {
+    public ResponseEntity<FindBoardDTO> createPost(@CurrentMember UserPrincipal userPrincipal, @RequestBody CreatePostDTO createPostDTO) {
 
         Long memberId = userPrincipal.getId();
 
         Board createdBoard = createBoardService.createPost(memberId, createPostDTO);
 
+        FindProductDTO findProduct = findProductService.findById(createdBoard.getProduct().getId());
+        FindMemberDTO findMember = findMemberService.findById(createdBoard.getWriter().getId());
+        FindBoardDTO findBoardDTO = new FindBoardDTO(
+                        createdBoard.getId(),
+                        createdBoard.getWriter().getId(),
+                        findMember.getName(),
+                        findMember.getProfileImage(),
+                        createdBoard.getContent(),
+                        findProduct.getProductName(),
+                        findProduct.getProductUrl(),
+                        findProduct.getImageUrl()
+                );
         return ResponseEntity.created(URI.create("/board"))
-                .body(new CreatedBoardResponseDTO(
-                        createdBoard.getId()
-                ));
+                .body(findBoardDTO);
     }
 
     @Operation(
