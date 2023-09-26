@@ -30,18 +30,7 @@ public class CreateBoardService {
     public Board createPost(Long memberId,CreatePostDTO createPostDTO) {
         WriterVO writerVO = new WriterVO(memberId);
 
-        CreateProductDTO createProductDTO = new CreateProductDTO(
-                createPostDTO.getProductId(),
-                createPostDTO.getProductUrl(),
-                createPostDTO.getImageUrl(),
-                createPostDTO.getProductName()
-        );
-        createProduct(createProductDTO);
-
-        String[] array = createPostDTO.getProductUrl().split("/");
-        String product = array[5].split("\\?")[0];
-        Long productId = Long.parseLong(product);
-        ProductVO productVO = new ProductVO(productId);
+        ProductVO productVO = new ProductVO(createPostDTO.getProductId());
         Board createdPost = new Board(
                 createPostDTO.getContent(),
                 writerVO,

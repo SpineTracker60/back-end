@@ -25,7 +25,7 @@ class CreateBoardServiceTest {
                         new CreatePostDTO(
                                 1L,
                                 "글 내용",
-                                "https://www.coupang.com/vp/products/1601845545"
+                                1L
                                 )
                         )
         );
