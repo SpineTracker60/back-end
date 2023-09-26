@@ -28,27 +28,26 @@ public class FindBoardDTO {
     @Schema(type = "String", example = "게시글 내용", description = "게시글 본문 내용 입니다.")
     private final String content;
 
-//    @Schema(type = "String", example = "상품 이름", description = "상품 이름 입니다.")
-//    @JsonProperty("product_name")
-//    private final String productName;
-//
+    @Schema(type = "String", example = "상품 이름", description = "상품 이름 입니다.")
+    @JsonProperty("product_name")
+    private final String productName;
+
     @Schema(type = "String", example = "상품 URL", description = "상품 URL 입니다.")
     @JsonProperty("product_url")
     private final String productUrl;
-//
-//    @Schema(type = "String", example = "이미지 URL", description = "이미지 URL 입니다.")
-//    @JsonProperty("image_url")
-//    private final String imageUrl;
 
-    public FindBoardDTO(Long boardId, Long writerId, String writerName, String profileImage, String content, Long productId) {
+    @Schema(type = "String", example = "이미지 URL", description = "이미지 URL 입니다.")
+    @JsonProperty("image_url")
+    private final String imageUrl;
+
+    public FindBoardDTO(Long boardId, Long writerId, String writerName, String profileImage, String content, String productName, String productUrl, String imageUrl) {
         this.boardId = boardId;
         this.writerId = writerId;
         this.writerName = writerName;
         this.profileImage = profileImage;
         this.content = content;
-//        this.productName = productName;
-//        this.productUrl = productUrl;
-//        this.imageUrl = imageUrl;
-        this.productUrl = "https://www.coupang.com/vp/products/" + productId;
+        this.productName = productName;
+        this.productUrl = productUrl;
+        this.imageUrl = imageUrl;
     }
 }

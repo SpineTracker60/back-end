@@ -30,13 +30,13 @@ public class CreateBoardService {
     public Board createPost(Long memberId,CreatePostDTO createPostDTO) {
         WriterVO writerVO = new WriterVO(memberId);
 
-//        CreateProductDTO createProductDTO = new CreateProductDTO(
-//                createPostDTO.getProductId(),
-//                createPostDTO.getProductUrl(),
-//                createPostDTO.getImageUrl(),
-//                createPostDTO.getProductName()
-//        );
-//        createProduct(createProductDTO);
+        CreateProductDTO createProductDTO = new CreateProductDTO(
+                createPostDTO.getProductId(),
+                createPostDTO.getProductUrl(),
+                createPostDTO.getImageUrl(),
+                createPostDTO.getProductName()
+        );
+        createProduct(createProductDTO);
 
         String[] array = createPostDTO.getProductUrl().split("/");
         String product = array[5].split("\\?")[0];
@@ -60,8 +60,8 @@ public class CreateBoardService {
                         createProductDTO.getImageUrl(),
                         createProductDTO.getProductName()
                 );
-                productRepository.save(createProduct);
+                return productRepository.save(createProduct);
             }
-            return null;
+            return product.get();
         }
 }
