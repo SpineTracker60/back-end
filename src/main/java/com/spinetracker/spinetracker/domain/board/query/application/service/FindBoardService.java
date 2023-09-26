@@ -2,7 +2,6 @@ package com.spinetracker.spinetracker.domain.board.query.application.service;
 
 import com.spinetracker.spinetracker.domain.board.query.application.dto.FindBoardDTO;
 import com.spinetracker.spinetracker.domain.board.query.application.dto.FindPostDTO;
-import com.spinetracker.spinetracker.domain.board.query.application.dto.FindProductDTO;
 import com.spinetracker.spinetracker.domain.board.query.domain.repository.BoardMapper;
 import com.spinetracker.spinetracker.domain.member.query.application.dto.FindMemberDTO;
 import com.spinetracker.spinetracker.domain.member.query.application.service.FindMemberService;
@@ -35,7 +34,7 @@ public class FindBoardService {
         List<FindBoardDTO> findBoardDTOList = new ArrayList<>();
 
         for (FindPostDTO findPost : findAllPostList) {
-            FindProductDTO findProduct = findProductService.findById(findPost.getProductId());
+//            FindProductDTO findProduct = findProductService.findById(findPost.getProductId());
             FindMemberDTO findMember = findMemberService.findById(findPost.getWriterId());
             findBoardDTOList.add(
               new FindBoardDTO(
@@ -44,10 +43,10 @@ public class FindBoardService {
                       findMember.getName(),
                       findMember.getProfileImage(),
                       findPost.getContent(),
-                      findProduct.getProductName(),
-                      findProduct.getProductUrl(),
-                      findProduct.getImageUrl()
-              )
+//                      findProduct.getProductName(),
+//                      findProduct.getProductUrl(),
+//                      findProduct.getImageUrl()
+                      findPost.getProductId())
             );
         }
 

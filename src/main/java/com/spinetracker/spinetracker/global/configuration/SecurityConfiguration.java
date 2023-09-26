@@ -120,7 +120,7 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                     .antMatchers("/oauth2/**", "/auth/**")
                         .hasRole(RoleEnum.MEMBER.name())
-                .antMatchers("/blog/**", "/member/**", "/board/**", "/posture/**", "/fcm/**")
+                .antMatchers("/blog/**", "/member/**", "/board/**", "/posture/**", "/fcm/**", "/product/**")
                     .permitAll()
                 .antMatchers("/admin/**")
                     .hasRole(RoleEnum.ADMIN.name())
