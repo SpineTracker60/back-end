@@ -24,10 +24,7 @@ class CreateBoardServiceTest {
                         1L,
                         new CreatePostDTO(
                                 1L,
-                                "상품 이름",
                                 "글 내용",
-                                12121L,
-                                "ASKDAKDLDASD",
                                 "ASDASDASDSD"
                                 )
                         )
