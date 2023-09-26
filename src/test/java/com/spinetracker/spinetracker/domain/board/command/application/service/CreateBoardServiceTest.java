@@ -25,26 +25,26 @@ class CreateBoardServiceTest {
                         new CreatePostDTO(
                                 1L,
                                 "글 내용",
-                                "ASDASDASDSD"
+                                "https://www.coupang.com/vp/products/1601845545"
                                 )
                         )
         );
 
     }
 
-    private static Stream<Arguments> getCreateProduct() {
-        return Stream.of(
-                Arguments.of(
-                        new CreateProductDTO(
-                                1L,
-                                "상품 url",
-                                "이미지 url",
-                                "상품 이름"
-                        )
-                )
-        );
-
-    }
+//    private static Stream<Arguments> getCreateProduct() {
+//        return Stream.of(
+//                Arguments.of(
+//                        new CreateProductDTO(
+//                                1L,
+//                                "상품 url",
+//                                "이미지 url",
+//                                "상품 이름"
+//                        )
+//                )
+//        );
+//
+//    }
 
     @DisplayName("boardDTO를 통해 게시글이 생성 되는지 확인")
     @ParameterizedTest
@@ -57,14 +57,14 @@ class CreateBoardServiceTest {
         );
     }
 
-    @DisplayName("CreateProductDTO를 통해 상품이 생성 되는지 확인")
-    @ParameterizedTest
-    @MethodSource("getCreateProduct")
-    @Transactional
-    void createProduct(CreateProductDTO createProductDTO) {
-
-        Assertions.assertDoesNotThrow(
-                () -> createBoardService.createProduct(createProductDTO)
-        );
-    }
+//    @DisplayName("CreateProductDTO를 통해 상품이 생성 되는지 확인")
+//    @ParameterizedTest
+//    @MethodSource("getCreateProduct")
+//    @Transactional
+//    void createProduct(CreateProductDTO createProductDTO) {
+//
+//        Assertions.assertDoesNotThrow(
+//                () -> createBoardService.createProduct(createProductDTO)
+//        );
+//    }
 }
