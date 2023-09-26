@@ -1,9 +1,6 @@
 package com.spinetracker.spinetracker.infra.firebase.command.infra.service;
 
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingException;
-import com.google.firebase.messaging.Message;
-import com.google.firebase.messaging.Notification;
+import com.google.firebase.messaging.*;
 import com.spinetracker.spinetracker.global.common.annotation.InfraService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,6 +23,7 @@ public class PostMessageService {
         // See documentation on defining a message payload.
         Notification notification = Notification.builder()
                 .setTitle(title)
+                .setImage("https://avatars.githubusercontent.com/u/19159759?s=400&u=0e0cc9ab7108cf605ef31085ba9451ec4dfb89e5&v=4")
                 .setBody(body)
                 .build();
 

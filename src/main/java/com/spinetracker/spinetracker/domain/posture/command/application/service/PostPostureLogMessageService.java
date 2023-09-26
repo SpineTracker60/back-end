@@ -26,9 +26,7 @@ public class PostPostureLogMessageService {
     @Transactional
     public void postDailyPostureLogMessage(Long memberId) {
         FindFcmTokenDTO findFcmTokenDTO = findFcmTokenService.findByMemberId(memberId);
-        System.out.println("findFcmTokenDTO = " + findFcmTokenDTO);
         DailyPostureLogDTO dailyPostureLogDTO = findDailyPostureLogService.getSummary(memberId);
-        System.out.println("dailyPostureLogDTO = " + dailyPostureLogDTO);
         requestPostFcmMessage.send("오늘의 자세 요약", dailyPostureLogDTO.toString(), findFcmTokenDTO.getFcmToken());
     }
 }
